@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tur Virtual Rumah Adat Mandar</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
+    />
+    <link rel="stylesheet" href="css/mandar.css" />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"
+    ></script>
+  </head>
+  <body>
+    <div class="top-buttons">
+      <a href="index.html" class="back-home">Kembali ke Beranda</a>
+    </div>
+
+    <h3>Tur Virtual Rumah Adat Mandar (Scenes 0 → 9)</h3>
+    <div id="panorama"></div>
+    <div class="scenes">
+      <button onclick="viewer.loadScene('s0')">0</button>
+      <button onclick="viewer.loadScene('s1')">1</button>
+      <button onclick="viewer.loadScene('s2')">2</button>
+      <button onclick="viewer.loadScene('s3')">3</button>
+      <button onclick="viewer.loadScene('s4')">4</button>
+      <button onclick="viewer.loadScene('s5')">5</button>
+      <button onclick="viewer.loadScene('s6')">6</button>
+      <button onclick="viewer.loadScene('s7')">7</button>
+      <button onclick="viewer.loadScene('s8')">8</button>
+      <button onclick="viewer.loadScene('s9')">9</button>
+    </div>
+    <script>
+      // Konfigurasi multi-scene
+      var viewer = pannellum.viewer("panorama", {
+        default: {
+          firstScene: "s0",
+          autoLoad: true,
+          showControls: true,
+        },
+        scenes: {
+          s0: {
+            title: "Spot 0",
+            type: "equirectangular",
+            panorama: "panos/image0.jpg",
+          },
+          s1: {
+            title: "Spot 1",
+            type: "equirectangular",
+            panorama: "panos/image1.jpg",
+          },
+          s2: {
+            title: "Spot 2",
+            type: "equirectangular",
+            panorama: "panos/image2.jpg",
+          },
+          s3: {
+            title: "Spot 3",
+            type: "equirectangular",
+            panorama: "panos/image3.jpg",
+          },
+          s4: {
+            title: "Spot 4",
+            type: "equirectangular",
+            panorama: "panos/image4.jpg",
+          },
+          s5: {
+            title: "Spot 5",
+            type: "equirectangular",
+            panorama: "panos/image5.jpg",
+          },
+          s6: {
+            title: "Spot 6",
+            type: "equirectangular",
+            panorama: "panos/image6.jpg",
+          },
+          s7: {
+            title: "Spot 7",
+            type: "equirectangular",
+            panorama: "panos/image7.jpg",
+          },
+          s8: {
+            title: "Spot 8",
+            type: "equirectangular",
+            panorama: "panos/image8.jpg",
+          },
+          s9: {
+            title: "Spot 9",
+            type: "equirectangular",
+            panorama: "panos/image9.jpg",
+          },
+        },
+      });
+
+      // === FITUR TAMBAHAN: Menampilkan koordinat saat panorama di-klik ===
+      const coordDiv = document.createElement("div");
+      coordDiv.style.position = "fixed";
+      coordDiv.style.bottom = "10px";
+      coordDiv.style.right = "10px";
+      coordDiv.style.background = "rgba(0, 0, 0, 0.7)";
+      coordDiv.style.color = "white";
+      coordDiv.style.padding = "5px 10px";
+      coordDiv.style.borderRadius = "5px";
+      coordDiv.style.fontFamily = "monospace";
+      coordDiv.style.zIndex = "2000";
+      coordDiv.textContent = "Klik panorama untuk melihat koordinat";
+      document.body.appendChild(coordDiv);
+
+      document
+        .getElementById("panorama")
+        .addEventListener("click", function (event) {
+          const coords = viewer.mouseEventToCoords(event);
+          if (coords) {
+            coordDiv.textContent = `Yaw: ${coords[1].toFixed(
+              2
+            )}, Pitch: ${coords[0].toFixed(2)}`;
+          }
+        });
+    </script>
+  </body>
+</html>

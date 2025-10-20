@@ -1,0 +1,82 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    sans-serif;
+  background: #0b1020;
+  color: #e6edf3;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Membuat panorama memenuhi sisa ruang layar */
+#panorama {
+  flex: 1;
+  width: 100%;
+  min-height: 70vh; /* Tinggi minimal agar tombol tidak menutupi semua */
+  border-top: 2px solid #1f2937;
+}
+
+/* Wadah untuk semua tombol navigasi scene */
+.scenes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px;
+  justify-content: center;
+  background: #111831;
+  border-top: 1px solid #1f2a44;
+}
+
+/* Gaya untuk setiap tombol scene */
+.scenes button {
+  padding: 6px 10px;
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.scenes button:hover {
+  border-color: #22d3ee;
+  color: #22d3ee;
+}
+
+/* Tombol "Kembali ke Beranda" */
+.top-buttons {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 1000; /* Memastikan tombol ini selalu di atas panorama */
+}
+
+.back-home {
+  background: #22d3ee;
+  color: #001018;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(34, 211, 238, 0.18);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: bg 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.back-home:hover {
+  background: #0ea5e9;
+  color: #fff;
+}
+
+/* Penyesuaian untuk layar yang lebih pendek */
+@media (max-height: 600px) {
+  #panorama {
+    min-height: 60vh;
+  }
+}
