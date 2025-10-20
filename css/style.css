@@ -1,0 +1,122 @@
+/* Variabel warna utama untuk tema dark mode */
+:root {
+  --bg-dark: #0f172a; /* Latar belakang utama yang sangat gelap */
+  --panel-dark: #1e293b; /* Warna panel/sidebar yang sedikit lebih terang */
+  --border-dark: #334155; /* Warna untuk garis pemisah/border */
+  --text-light: #e2e8f0; /* Warna teks utama yang terang */
+  --text-muted: #94a3b8; /* Warna teks sekunder/abu-abu */
+  --accent-cyan: #22d3ee; /* Warna aksen (biru-cyan) untuk highlight */
+}
+
+/* Pengaturan dasar untuk seluruh halaman */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  margin: 0;
+  color: var(--text-light);
+  background-color: var(--bg-dark);
+}
+
+/* Kontainer utama yang mengatur sidebar dan panorama */
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* --- Pengaturan Sidebar (sebelah kiri) --- */
+#sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  background-color: var(--panel-dark);
+  padding: 20px;
+  border-right: 1px solid var(--border-dark);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar h1 {
+  font-size: 1.6em;
+  margin-top: 0;
+  color: white;
+}
+
+#sidebar .meta {
+  font-size: 0.9em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-dark);
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+/* Grid untuk tombol-tombol scene */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.scene-btn {
+  padding: 10px;
+  border: 1px solid var(--border-dark);
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+  font-weight: bold;
+}
+
+.scene-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-cyan);
+  color: white;
+}
+
+.scene-btn.active {
+  background-color: var(--accent-cyan);
+  color: var(--bg-dark);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+}
+
+/* Kontrol navigasi (Tombol Prev/Next) */
+.controls {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid var(--border-dark);
+  display: flex;
+  justify-content: space-between;
+}
+
+.controls button {
+  width: 48%;
+  padding: 12px;
+  border: 1px solid var(--border-dark);
+  background-color: transparent;
+  color: var(--text-light);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.controls button:hover {
+  background-color: var(--accent-cyan);
+  color: var(--bg-dark);
+  border-color: var(--accent-cyan);
+}
+
+.tip {
+  font-size: 0.8em;
+  color: var(--text-muted);
+  margin-top: 15px;
+  text-align: center;
+  width: 100%;
+}
+
+/* --- Pengaturan Area Panorama (sebelah kanan) --- */
+#panorama {
+  flex-grow: 1;
+}

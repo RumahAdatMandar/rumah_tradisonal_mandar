@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Virtual Tour: Rumah Boyang Mandar</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside id="sidebar">
+        <h1>Virtual Tour: Rumah Boyang Mandar</h1>
+        <p class="meta">
+          Jelajahi setiap sudut Rumah Adat Mandar (Boyang).<br />
+          Klik pada salah satu titik di bawah untuk langsung menuju lokasi.
+        </p>
+        <div id="sceneGrid" class="grid"></div>
+        <div class="controls">
+          <button id="prevBtn" title="Scene sebelumnya (←)">
+            ◀ Sebelumnya
+          </button>
+          <button id="nextBtn" title="Scene berikutnya (→)">
+            Berikutnya ▶
+          </button>
+          <p class="tip">
+            Keyboard: ← / → untuk pindah · Klik & drag untuk melihat
+          </p>
+        </div>
+      </aside>
+      <main id="panorama"></main>
+    </div>
+
+    <script>
+      // === BAGIAN KONFIGURASI PENTING ===
+      const START_INDEX = 0; // Nomor scene pertama
+      const END_INDEX = 9; // Nomor scene terakhir (sesuai jumlah gambar Anda)
+
+      // Path file panorama berdasarkan nomor
+      const panoPath = (i) => `panos/image${i}.jpg`;
+      const sceneId = (i) => `scene-${i}`;
+
+      // (OPSIONAL) Kustomisasi posisi/teks hotspot untuk setiap scene
+      // Jika tidak diisi, hotspot akan default lurus ke depan/belakang.
+      const overrides = {
+        // Contoh: Di scene 0, hotspot ke scene 1 berada di yaw 15, pitch -5
+        0: { next: { yaw: 15, pitch: -5, text: "Naik ke Tangga" } },
+        // Contoh: Di scene 1, hotspot ke scene 2 (masuk) ada di yaw 5
+        1: {
+          next: { yaw: 5, pitch: 0, text: "Masuk ke Dalam Rumah" },
+          prev: { yaw: 180, pitch: -10, text: "Kembali ke Halaman" },
+        },
+        // Contoh: Di scene 2, hotspot ke scene 3 ada di samping (yaw 90)
+        2: { next: { yaw: 90, pitch: 0, text: "Menuju Ruang Tengah" } },
+      };
+
+      // === Inisialisasi Pannellum ===
+      const config = {
+        default: {
+          firstScene: sceneId(START_INDEX),
+          autoLoad: true,
+          showControls: true,
+          compass: false,
+          hfov: 110,
+        },
+        scenes: {},
+      };
+
+      // Membuat konfigurasi untuk setiap scene secara otomatis
+      for (let i = START_INDEX; i <= END_INDEX; i++) {
+        // Ambil data kustomisasi jika ada, jika tidak, gunakan default
+        const nextHotspotOverride = overrides[i]?.next || {
+          yaw: 0,
+          pitch: 0,
+          text: `Lanjut ke Spot ${i + 1}`,
+        };
+        const prevHotspotOverride = overrides[i]?.prev || {
+          yaw: 180,
+          pitch: 0,
+          text: `Kembali ke Spot ${i - 1}`,
+        };
+
+        config.scenes[sceneId(i)] = {
+          title: `Rumah Boyang - Spot ${i}`,
+          type: "equirectangular",
+          panorama: panoPath(i),
+          hotSpots: [
+            // Hotspot untuk kembali ke scene sebelumnya (jika bukan scene pertama)
+            ...(i > START_INDEX
+              ? [
+                  {
+                    yaw: prevHotspotOverride.yaw,
+                    pitch: prevHotspotOverride.pitch,
+                    type: "scene",
+                    text: prevHotspotOverride.text,
+                    sceneId: sceneId(i - 1),
+                  },
+                ]
+              : []),
+            // Hotspot untuk lanjut ke scene berikutnya (jika bukan scene terakhir)
+            ...(i < END_INDEX
+              ? [
+                  {
+                    yaw: nextHotspotOverride.yaw,
+                    pitch: nextHotspotOverride.pitch,
+                    type: "scene",
+                    text: nextHotspotOverride.text,
+                    sceneId: sceneId(i + 1),
+                  },
+                ]
+              : []),
+          ],
+        };
+      }
+
+      // Inisialisasi viewer Pannellum
+      const viewer = pannellum.viewer("panorama", config);
+
+      // === Logika untuk UI (Sidebar dan Tombol) ===
+      const grid = document.getElementById("sceneGrid");
+      for (let i = START_INDEX; i <= END_INDEX; i++) {
+        const b = document.createElement("button");
+        b.className = "scene-btn";
+        b.textContent = i;
+        b.dataset.scene = sceneId(i);
+        b.onclick = () => viewer.loadScene(sceneId(i));
+        grid.appendChild(b);
+      }
+
+      // Fungsi untuk menandai tombol scene yang aktif
+      const setActive = () => {
+        const current = viewer.getScene();
+        document.querySelectorAll(".scene-btn").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.scene === current);
+        });
+      };
+      viewer.on("load", setActive);
+      setActive();
+
+      // Navigasi tombol prev/next dan keyboard
+      const idxFromScene = (sid) => parseInt(sid.split("-")[1], 10);
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      prevBtn.onclick = () => {
+        const i = idxFromScene(viewer.getScene());
+        if (i > START_INDEX) viewer.loadScene(sceneId(i - 1));
+      };
+      nextBtn.onclick = () => {
+        const i = idxFromScene(viewer.getScene());
+        if (i < END_INDEX) viewer.loadScene(sceneId(i + 1));
+      };
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") prevBtn.click();
+        if (e.key === "ArrowRight") nextBtn.click();
+      });
+    </script>
+  </body>
+</html>
