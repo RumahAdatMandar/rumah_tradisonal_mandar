@@ -15,22 +15,15 @@
   <body>
     <div class="app">
       <aside id="sidebar">
-        <h1>Virtual Tour: Rumah Boyang Mandar</h1>
+        <h1>Virtual Tour: Rumah Adat Mandar</h1>
         <p class="meta">
           Jelajahi setiap sudut Rumah Adat Mandar (Boyang).<br />
           Klik pada salah satu titik di bawah untuk langsung menuju lokasi.
         </p>
         <div id="sceneGrid" class="grid"></div>
         <div class="controls">
-          <button id="prevBtn" title="Scene sebelumnya (←)">
-            ◀ Sebelumnya
-          </button>
-          <button id="nextBtn" title="Scene berikutnya (→)">
-            Berikutnya ▶
-          </button>
-          <p class="tip">
-            Keyboard: ← / → untuk pindah · Klik & drag untuk melihat
-          </p>
+          <button id="prevBtn" title="Scene sebelumnya">◀ Sebelumnya</button>
+          <button id="nextBtn" title="Scene berikutnya">Berikutnya ▶</button>
         </div>
       </aside>
       <main id="panorama"></main>
@@ -38,28 +31,79 @@
 
     <script>
       // === BAGIAN KONFIGURASI PENTING ===
-      const START_INDEX = 0; // Nomor scene pertama
-      const END_INDEX = 9; // Nomor scene terakhir (sesuai jumlah gambar Anda)
+      const START_INDEX = 0;
+      const END_INDEX = 9;
+
+      // Daftar Nama Scene (TETAP ADA)
+      const sceneTitles = [
+        "Halaman Depan", // 0
+        "Naik Tangga", // 1
+        "Ruangan Utama 1", // 2
+        "Ruangan Utama 2", // 3
+        "Teras 1", // 4
+        "Teras 2", // 5
+        "Penghubung (Dapur)", // 6
+        "Dapur", // 7
+        "Tangga Belakang", // 8
+        "Naong Boyang", // 9
+      ];
 
       // Path file panorama berdasarkan nomor
       const panoPath = (i) => `panos/image${i}.jpg`;
       const sceneId = (i) => `scene-${i}`;
 
-      // (OPSIONAL) Kustomisasi posisi/teks hotspot untuk setiap scene
-      // Jika tidak diisi, hotspot akan default lurus ke depan/belakang.
+      // Koordinat Yaw & Pitch Anda (TETAP SAMA)
       const overrides = {
-        // Contoh: Di scene 0, hotspot ke scene 1 berada di yaw 15, pitch -5
-        0: { next: { yaw: 15, pitch: -5, text: "Naik ke Tangga" } },
-        // Contoh: Di scene 1, hotspot ke scene 2 (masuk) ada di yaw 5
-        1: {
-          next: { yaw: 5, pitch: 0, text: "Masuk ke Dalam Rumah" },
-          prev: { yaw: 180, pitch: -10, text: "Kembali ke Halaman" },
+        0: {
+          // Halaman Depan
+          next: { yaw: -147, pitch: 3 }, // Arahkan ke tangga
         },
-        // Contoh: Di scene 2, hotspot ke scene 3 ada di samping (yaw 90)
-        2: { next: { yaw: 90, pitch: 0, text: "Menuju Ruang Tengah" } },
+        1: {
+          // Naik Tangga
+          next: { yaw: 3, pitch: 6.3 }, // Arahkan ke pintu Ruangan Utama 1
+          prev: { yaw: -180, pitch: -44 }, // Arahkan kembali ke Halaman Depan
+        },
+        2: {
+          // Ruangan Utama 1
+          next: { yaw: -104, pitch: -1 }, // Arahkan ke Ruangan Utama 2
+          prev: { yaw: 65, pitch: -1.991 }, // Arahkan kembali ke Pintu (Naik Tangga)
+        },
+        3: {
+          // Ruangan Utama 2
+          next: { yaw: -140, pitch: 4 }, // Arahkan ke Teras 1
+          prev: { yaw: 100, pitch: 0 }, // Arahkan kembali ke Ruangan Utama 1
+        },
+        4: {
+          // Teras 1
+          next: { yaw: -5, pitch: -18 }, // Arahkan ke Teras 2
+          prev: { yaw: -128, pitch: -8 }, // Arahkan kembali ke Ruangan Utama 2
+        },
+        5: {
+          // Teras 2
+          next: { yaw: 146, pitch: -1 }, // Arahkan ke Penghubung Dapur
+          prev: { yaw: 173, pitch: -1 }, // Arahkan kembali ke Teras 1
+        },
+        6: {
+          // Penghubung (Dapur)
+          next: { yaw: 175, pitch: -2 }, // Arahkan ke Dapur
+          prev: { yaw: 15, pitch: -4 }, // Arahkan kembali ke Teras 2
+        },
+        7: {
+          // Dapur
+          next: { yaw: -147, pitch: 0 }, // Arahkan ke Tangga Belakang
+          prev: { yaw: -98, pitch: -5 }, // Arahkan kembali ke Penghubung
+        },
+        // Tangga Belakang
+        8: {
+          next: { yaw: -161, pitch: -1 }, // Arahkan ke Naong Boyang
+          prev: { yaw: 2, pitch: 21 }, // Arahkan kembali ke Dapur
+        },
+        // Naong Boyang
+        9: {
+          prev: { yaw: 180, pitch: 0 }, // Arahkan kembali ke Tangga Belakang
+        },
       };
 
-      // === Inisialisasi Pannellum ===
       const config = {
         default: {
           firstScene: sceneId(START_INDEX),
@@ -67,49 +111,53 @@
           showControls: true,
           compass: false,
           hfov: 110,
+          keyboardZoom: true,
+          hotSpotDebug: true,
         },
         scenes: {},
       };
 
-      // Membuat konfigurasi untuk setiap scene secara otomatis
       for (let i = START_INDEX; i <= END_INDEX; i++) {
-        // Ambil data kustomisasi jika ada, jika tidak, gunakan default
-        const nextHotspotOverride = overrides[i]?.next || {
-          yaw: 0,
-          pitch: 0,
-          text: `Lanjut ke Spot ${i + 1}`,
+        const nextOverride = overrides[i]?.next || {};
+        const prevOverride = overrides[i]?.prev || {};
+
+        // Teks hotspot TETAP MENGGUNAKAN NAMA (cth: "Menuju: Naik Tangga")
+        const nextHotspotConfig = {
+          yaw: nextOverride.yaw || 0,
+          pitch: nextOverride.pitch || 0,
+          text: nextOverride.text || `Menuju: ${sceneTitles[i + 1]}`,
         };
-        const prevHotspotOverride = overrides[i]?.prev || {
-          yaw: 180,
-          pitch: 0,
-          text: `Kembali ke Spot ${i - 1}`,
+
+        const prevHotspotConfig = {
+          yaw: prevOverride.yaw || 180,
+          pitch: prevOverride.pitch || 0,
+          text: prevOverride.text || `Kembali ke: ${sceneTitles[i - 1]}`,
         };
 
         config.scenes[sceneId(i)] = {
-          title: `Rumah Boyang - Spot ${i}`,
+          // Judul scene TETAP MENGGUNAKAN NAMA (cth: "Halaman Depan")
+          title: sceneTitles[i] || `Spot ${i}`,
           type: "equirectangular",
           panorama: panoPath(i),
           hotSpots: [
-            // Hotspot untuk kembali ke scene sebelumnya (jika bukan scene pertama)
             ...(i > START_INDEX
               ? [
                   {
-                    yaw: prevHotspotOverride.yaw,
-                    pitch: prevHotspotOverride.pitch,
+                    yaw: prevHotspotConfig.yaw,
+                    pitch: prevHotspotConfig.pitch,
                     type: "scene",
-                    text: prevHotspotOverride.text,
+                    text: prevHotspotConfig.text,
                     sceneId: sceneId(i - 1),
                   },
                 ]
               : []),
-            // Hotspot untuk lanjut ke scene berikutnya (jika bukan scene terakhir)
             ...(i < END_INDEX
               ? [
                   {
-                    yaw: nextHotspotOverride.yaw,
-                    pitch: nextHotspotOverride.pitch,
+                    yaw: nextHotspotConfig.yaw,
+                    pitch: nextHotspotConfig.pitch,
                     type: "scene",
-                    text: nextHotspotOverride.text,
+                    text: nextHotspotConfig.text,
                     sceneId: sceneId(i + 1),
                   },
                 ]
@@ -126,13 +174,16 @@
       for (let i = START_INDEX; i <= END_INDEX; i++) {
         const b = document.createElement("button");
         b.className = "scene-btn";
+
+        // === PERUBAHAN SATU-SATUNYA DI SINI ===
+        // Tombol di sidebar diubah menjadi angka (0, 1, 2, ...)
         b.textContent = i;
+
         b.dataset.scene = sceneId(i);
         b.onclick = () => viewer.loadScene(sceneId(i));
         grid.appendChild(b);
       }
 
-      // Fungsi untuk menandai tombol scene yang aktif
       const setActive = () => {
         const current = viewer.getScene();
         document.querySelectorAll(".scene-btn").forEach((btn) => {
@@ -142,7 +193,7 @@
       viewer.on("load", setActive);
       setActive();
 
-      // Navigasi tombol prev/next dan keyboard
+      // Navigasi tombol prev/next di sidebar
       const idxFromScene = (sid) => parseInt(sid.split("-")[1], 10);
       const prevBtn = document.getElementById("prevBtn");
       const nextBtn = document.getElementById("nextBtn");
@@ -155,10 +206,6 @@
         const i = idxFromScene(viewer.getScene());
         if (i < END_INDEX) viewer.loadScene(sceneId(i + 1));
       };
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft") prevBtn.click();
-        if (e.key === "ArrowRight") nextBtn.click();
-      });
     </script>
   </body>
 </html>
