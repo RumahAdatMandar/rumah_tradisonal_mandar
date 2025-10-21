@@ -29,19 +29,30 @@
       th {
         background-color: #504f4f;
       }
-      /* Style untuk kolom Rumus agar rapi seperti di screenshot */
+      /* Style untuk kolom Rumus agar rapi */
       .rumus-matematis {
         font-family: "Times New Roman", Times, serif;
         font-size: 1.1em;
         text-align: center;
         background-color: #646060;
-        white-space: nowrap; /* Mencegah rumus terpotong */
+        white-space: nowrap;
       }
-      /* Style Panorama */
-      #mini-panorama {
+      #mini-panorama,
+      #mini-panorama-2 {
         width: 100%;
         height: 400px;
         background-color: #f0f0f0;
+      }
+      pre {
+        background-color: #2b2b2b;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      code {
+        font-family: "Courier New", Courier, monospace;
+        line-height: 1.5;
       }
     </style>
   </head>
@@ -68,10 +79,10 @@
           dan menyatu dengan lingkungan pesisir, tersimpan sebuah sistem
           konstruksi yang terencana dengan presisi luar biasa. Setiap sudut,
           tiang, dan sambungan pada Boyang bukanlah hasil kebetulan, melainkan
-          buah dari perhitungan cermat yang diwariskan secara turun-temurun. Di
-          sinilah letak keistimewaannya unsur-unsur matematika tidak hanya hadir
-          sebagai elemen teknis untuk memastikan kekuatan bangunan, tetapi juga
-          terjalin erat dengan denyut nadi kehidupan masyarakatnya.
+          buah dari perhitungan cermat yang diwariskan secara turun-temurun.
+          Disinilah letak keistimewaannya unsur-unsur matematika tidak hanya
+          hadir sebagai elemen teknis untuk memastikan kekuatan bangunan, tetapi
+          juga terjalin erat dengan denyut nadi kehidupan masyarakatnya.
           Prinsip-prinsip geometri, rasio, dan bahkan bilangan terapan ini
           menyatu secara tak terpisahkan dengan fungsi praktis sebagai hunian
           yang adaptif, filosofi yang mencerminkan pandangan hidup sebagai
@@ -101,6 +112,36 @@
           dimana tiga susun untuk rakyat biasa, lima susun untuk bangsawan, dan
           tujuh susun khusus untuk raja (mara'dia).
         </p>
+
+        <h3>Contoh Penghitungan Volume Atap (Prisma Segitiga)</h3>
+        <p>
+          Untuk menghitung volume ruang di bawah atap, kita menggunakan rumus
+          volume prisma:
+        </p>
+        <pre><code>V = Luas Alas * tinggi prisma</code></pre>
+        <p>Dimana:</p>
+        <ul>
+          <li><strong>V</strong> = Volume atap</li>
+          <li>
+            <strong>Luas Alas</strong> = Luas bidang segitiga di depan (1/2 * a
+            * t)
+          </li>
+          <li><strong>tinggi prisma</strong> = Panjang rumah</li>
+        </ul>
+        <p>
+          Misalnya, jika alas segitiga atap (a) 8 meter dan tinggi alas (t alas)
+          5 meter. Panjang rumah (tinggi prisma) adalah 12 meter.
+        </p>
+        <p>Langkah-langkah perhitungan:</p>
+        <pre><code>   Langkah 1: Hitung Luas Alas Segitiga
+    Luas Alas = 1/2 * a * t
+    Luas Alas = 0.5 * 8 m * 5 m = 20 m²
+
+    Langkah 2: Hitung Volume Prisma
+    V = Luas Alas * tinggi prisma
+    V = 20 m² * 12 m = 240 m³</code></pre>
+        <p>Dengan demikian, volume atap adalah 240 meter kubik.</p>
+        <p>Rumus-rumus yang relevan untuk alas atap (Segitiga 2D):</p>
         <table>
           <thead>
             <tr>
@@ -127,7 +168,7 @@
             </tr>
             <tr>
               <td><strong>Tinggi segitiga</strong></td>
-              <td class="rumus-matematis">t = 2L/a</td>
+              <td class="rumus-matematis">t = 2L / a</td>
               <td>Dari rumus luas</td>
             </tr>
             <tr>
@@ -153,14 +194,101 @@
           </tbody>
         </table>
 
-        <h3>2. Tiang Penyangga (A'ri)</h3>
+        <p>Rumus-rumus untuk bangun ruang atap (Prisma Segitiga 3D):</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis Rumus (Prisma Segitiga 3D)</th>
+              <th>Rumus Matematis</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Volume Prisma</strong></td>
+              <td class="rumus-matematis">V = Luas Alas × tinggi prisma</td>
+              <td>(Luas Alas = Luas Segitiga)</td>
+            </tr>
+            <tr>
+              <td><strong>Luas Permukaan Prisma</strong></td>
+              <td class="rumus-matematis">
+                Lp = (2 × Luas Alas) + (Keliling Alas × tinggi prisma)
+              </td>
+              <td>Jumlah luas semua sisi</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>2. Tangga (Era): Gradien dan Bilangan ganjil</h3>
+        <p>
+          Tangga, atau Era, tidak hanya berfungsi sebagai akses fisik, tetapi
+          juga sebagai elemen transisi simbolis yang menghubungkan dunia luar
+          dengan ruang domestik di dalam rumah. Konstruksinya adalah penerapan
+          langsung dari konsep matematis
+          <strong>gradien atau kemiringan</strong>. Konsep ini melibatkan
+          perhitungan perbandingan yang cermat antara ketinggian vertikal (rise)
+          dan jarak horizontal (run) dari setiap anak tangga untuk memastikan
+          keamanan dan kenyamanan bagi yang melintasinya. Di luar aspek teknis
+          tersebut, terdapat sebuah aturan numerik yang unik dan konsisten
+          diterapkan, yaitu
+          <strong>jumlah anak tangga harus selalu ganjil</strong>. Aturan ini
+          adalah manifestasi dari "matematika budaya" yang terikat erat pada
+          sistem kepercayaan lokal. Angka ganjil dipercaya oleh masyarakat
+          Mandar membawa keberuntungan dan menolak bala.
+        </p>
+
+        <h3>Contoh Penghitungan Gradien dan Jumlah Anak Tangga</h3>
+        <p>
+          Misalnya, lantai rumah berada 3 meter (300 cm) di atas tanah. Jarak
+          horizontal (run) yang diinginkan untuk tangga adalah 4 meter (400 cm).
+          Tinggi ideal satu anak tangga (rise) adalah 20 cm.
+        </p>
+        <p>Perhitungan:</p>
+        <pre><code>
+    1. Gradien (Kemiringan)
+    m = rise / run
+    m = 300 cm / 400 cm = 0.75
+
+    2. Jumlah Anak Tangga
+    Jumlah = Total Tinggi / Tinggi per anak tangga
+    Jumlah = 300 cm / 20 cm = 15</code></pre>
+        <p>
+          Jumlah anak tangga adalah 15 (Bilangan ganjil), yang sesuai dengan
+          aturan budaya Mandar.
+        </p>
+        <h3>3. Tiang Penyangga (A'ri)</h3>
         <p>
           Fondasi Rumah Boyang bertumpu pada puluhan tiang penyangga (A'ri)
           berbentuk <strong>balok</strong>. Penempatannya mengikuti sistem grid
           yang presisi untuk memastikan distribusi berat bangunan yang seimbang,
           membuat struktur menjadi leboh stabil dan tahan dari guncangan. secara
           filosofis, tiang-tiang ini adalah simbol pilar kekuatan dan martabat
-          keluarga
+          keluarga.
+        </p>
+
+        <h3>Contoh Penghitungan Volume Tiang (Balok)</h3>
+        <p>
+          Kita dapat menghitung kebutuhan kayu untuk satu tiang (A'ri)
+          menggunakan rumus volume balok:
+        </p>
+        <pre><code>V = p * l * t</code></pre>
+        <p>Dimana:</p>
+        <ul>
+          <li><strong>V</strong> = Volume kayu</li>
+          <li>
+            <strong>p</strong> = panjang penampang (misal: 20 cm atau 0.2 m)
+          </li>
+          <li>
+            <strong>l</strong> = lebar penampang (misal: 20 cm atau 0.2 m)
+          </li>
+          <li><strong>t</strong> = tinggi tiang (misal: 3 m)</li>
+        </ul>
+        <p>Perhitungan:</p>
+        <pre><code>V = p * l * t
+V = 0.2 m * 0.2 m * 3 m = 0.12 m³</code></pre>
+        <p>
+          Dengan demikian, volume kayu yang dibutuhkan untuk satu tiang adalah
+          0.12 meter kubik.
         </p>
         <table>
           <thead>
@@ -204,7 +332,7 @@
           </tbody>
         </table>
 
-        <h3>3. Lantai</h3>
+        <h3>4. Lantai</h3>
         <p>
           Susunan papan pada lantai menciptakan pola
           <strong>garis sejajar</strong> dan <strong>pola berulang</strong> yang
@@ -212,6 +340,31 @@
           (ventilasi) dari kolong rumah, yang mendinginkan suhu di iklim tropis.
           Pola yang teratur ini mencerminkan nilai-nilai keteraturan dan harmoni
           dalam kehidupan.
+        </p>
+
+        <h3>Contoh Penghitungan Pola Lantai (Barisan Aritmetika)</h3>
+        <p>
+          Misalnya, lantai renggang terdiri dari bilah papan selebar 10 cm,
+          diikuti celah 2 cm. Pola ini berulang setiap 12 cm. Kita bisa mencari
+          posisi awal bilah papan ke-n menggunakan rumus barisan aritmetika:
+        </p>
+        <pre><code>Un = a + (n - 1)d</code></pre>
+        <p>Dimana:</p>
+        <ul>
+          <li><strong>Un</strong> = Posisi awal bilah papan ke-n</li>
+          <li><strong>a</strong> = Posisi awal bilah pertama (misal: 0 cm)</li>
+          <li><strong>n</strong> = Urutan bilah papan</li>
+          <li>
+            <strong>d</strong> = Beda/jarak antar pola (10 cm + 2 cm = 12 cm)
+          </li>
+        </ul>
+        <p>Mencari posisi awal bilah papan ke-5 (n=5):</p>
+        <pre><code>Un = a + (n - 1)d
+ U5 = 0 + (5 - 1) * 12 cm
+ U5 = 4 * 12 cm = 48 cm</code></pre>
+        <p>
+          Dengan demikian, bilah papan kelima dimulai pada jarak 48 cm dari
+          titik awal.
         </p>
         <table>
           <thead>
@@ -262,13 +415,41 @@
           </tbody>
         </table>
 
-        <h3>4. Pintu dan Lengkungan</h3>
+        <h3>5. Pintu dan Lengkungan</h3>
         <p>
           Pintu utama merupakan gabungan dari
           <strong>persegi panjang (balok)</strong> dan lengkungan di atasnya
           yang dapat dianalisis sebagai <strong>setengah tabung</strong>.
           Bentuknya yang simetris melambangkan keseimbangan dan harmoni,
           sekaligus keterbukaan dan keramahtamahan masyarakat Mandar.
+        </p>
+
+        <h3>Contoh Penghitungan Luas Permukaan Pintu</h3>
+        <p>
+          Misalnya, kita ingin menghitung luas permukaan depan pintu untuk
+          dicat. Pintu terdiri dari 2 bagian: persegi panjang (badan) dan
+          setengah lingkaran (lengkungan).
+        </p>
+        <ul>
+          <li>Lebar Pintu (diameter) = 1.2 m (maka jari-jari (r) = 0.6 m)</li>
+          <li>Tinggi badan pintu (tbadan) = 2 m</li>
+        </ul>
+        <p>Langkah-langkah perhitungan:</p>
+        <pre><code>1. Luas Badan (Persegi Panjang)
+Lbadan = p * l
+Lbadan = 1.2 m * 2 m = 2.4 m²
+
+2. Luas Lengkungan (Setengah Lingkaran)
+Llengkung = 1/2 * pi * r²
+Llengkung = 0.5 * 3.14 * (0.6 m)²
+Llengkung = 0.5 * 3.14 * 0.36 m² = 0.5652 m² (dibulatkan 0.57 m²)
+
+3. Total Luas
+Ltotal = Lbadan + Llengkung
+Ltotal = 2.4 m² + 0.57 m² = 2.97 m²</code></pre>
+        <p>
+          Dengan demikian, total luas permukaan depan pintu adalah 2.97 meter
+          persegi.
         </p>
         <table>
           <thead>
@@ -290,13 +471,13 @@
             </tr>
             <tr>
               <td>Luas Permukaan</td>
-              <td class="rumus-matematis">L = ½(2πr(r+t)) + r×t</td>
-              <td>Setengah luas silinder + bidang datar alas</td>
+              <td class="rumus-matematis">Lp = (πrt) + (πr²) + (2rt)</td>
+              <td>L.lengkung + L.dua ujung + L.alas</td>
             </tr>
             <tr>
-              <td>Keliling Alas</td>
+              <td>Keliling Alas (Busur)</td>
               <td class="rumus-matematis">K = πr + 2r</td>
-              <td>Panjang busur setengah lingkaran + dua sisi tegak</td>
+              <td>Panjang busur setengah lingkaran + diameter</td>
             </tr>
             <tr>
               <td rowspan="3"><strong>Balok (Persegi Panjang 3D)</strong></td>
@@ -305,19 +486,19 @@
               <td>Hasil kali panjang, lebar, dan tinggi</td>
             </tr>
             <tr>
-              <td>Luas Permukaan</td>
+              <td><strong>Luas Permukaan</strong></td>
               <td class="rumus-matematis">L = 2(pl + pt + lt)</td>
               <td>Jumlah luas keenam sisi balok</td>
             </tr>
             <tr>
-              <td>Diagonal Ruang</td>
+              <td><strong>Diagonal Ruang</strong></td>
               <td class="rumus-matematis">d = √(p² + l² + t²)</td>
               <td>Garis diagonal dari satu sudut ke sudut seberangnya</td>
             </tr>
           </tbody>
         </table>
 
-        <h3>Contoh Panorama 360°</h3>
+        <h3>Contoh Panorama 360° (Interior)</h3>
         <p>
           Putar panorama berikut untuk memvisualisasikan bagaimana ruang di
           dalam Rumah Boyang terasa. Gunakan pointer atau sentuhan untuk
@@ -327,6 +508,14 @@
           <div id="mini-panorama"></div>
         </div>
 
+        <h3>Contoh Panorama 360° (Eksterior)</h3>
+        <p>
+          Visualisasi panorama 360° dari sudut yang berbeda (misalnya bagian
+          luar atau kolong rumah).
+        </p>
+        <div class="mini-panorama">
+          <div id="mini-panorama-2"></div>
+        </div>
         <h2>Kesimpulan</h2>
         <p>
           Berdasarkan analisis yang telah dilakukan, dapat disimpulkan bahwa
@@ -350,11 +539,24 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // Panorama 1 (yang sudah ada)
         pannellum.viewer("mini-panorama", {
           type: "equirectangular",
-          panorama: "panos/image0.jpg",
+          panorama: "panos/image2.jpg", // Ini sudah benar
+          autoLoad: true,
+          showZoomCtrl: false,
+          compass: false,
+          hfov: 110,
+          pitch: 0,
+          yaw: 120,
+        });
+
+        pannellum.viewer("mini-panorama-2", {
+          type: "equirectangular",
+          panorama: "panos/image0.jpg", // <-- PERBAIKAN DI SINI
           autoLoad: true,
           showZoomCtrl: false,
           compass: false,
