@@ -5,14 +5,244 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Virtual Tour: Rumah Boyang Mandar</title>
 
+    <!-- 1. FONT DARI GOOGLE FONTS (UNTUK TOMBOL KANAN ATAS) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 2. LIBRARY PANNELLUM -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
     />
+    <!-- Hapus baris di bawah ini jika Anda tidak memiliki file style.css terpisah -->
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+    <!-- 3. KODE CSS BARU ANDA (DARK MODE) + GABUNGAN FITUR LAMA -->
+    <style>
+      /* Variabel warna utama untuk tema dark mode */
+      :root {
+        --bg-dark: #0f172a; /* Latar belakang utama yang sangat gelap */
+        --panel-dark: #1e293b; /* Warna panel/sidebar yang sedikit lebih terang */
+        --border-dark: #334155; /* Warna untuk garis pemisah/border */
+        --text-light: #e2e8f0; /* Warna teks utama yang terang */
+        --text-muted: #94a3b8; /* Warna teks sekunder/abu-abu */
+        --accent-cyan: #22d3ee; /* Warna aksen (biru-cyan) untuk highlight */
+      }
+
+      /* Pengaturan dasar untuk seluruh halaman */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        margin: 0;
+        color: var(--text-light);
+        background-color: var(--bg-dark);
+      }
+
+      /* Kontainer utama yang mengatur sidebar dan panorama */
+      .app {
+        display: flex;
+        height: 100vh;
+      }
+
+      /* --- Pengaturan Sidebar (sebelah kiri) --- */
+      #sidebar {
+        width: 320px;
+        flex-shrink: 0;
+        background-color: var(--panel-dark);
+        padding: 20px;
+        border-right: 1px solid var(--border-dark);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #sidebar h1 {
+        font-size: 1.6em;
+        margin-top: 0;
+        color: white;
+      }
+
+      #sidebar .meta {
+        font-size: 0.9em;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border-dark);
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+      }
+
+      /* Grid untuk tombol-tombol scene */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .scene-btn {
+        padding: 10px;
+        border: 1px solid var(--border-dark);
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        cursor: pointer;
+        border-radius: 8px;
+        transition: all 0.2s ease-in-out;
+        font-weight: bold;
+      }
+
+      .scene-btn:hover {
+        transform: translateY(-2px);
+        border-color: var(--accent-cyan);
+        color: white;
+      }
+
+      .scene-btn.active {
+        background-color: var(--accent-cyan);
+        color: var(--bg-dark);
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+      }
+
+      /* Kontrol navigasi (Tombol Prev/Next) */
+      .controls {
+        margin-top: auto;
+        padding-top: 15px;
+        border-top: 1px solid var(--border-dark);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .controls button {
+        width: 48%;
+        padding: 12px;
+        border: 1px solid var(--border-dark);
+        background-color: transparent;
+        color: var(--text-light);
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.2s ease;
+      }
+
+      .controls button:hover {
+        background-color: var(--accent-cyan);
+        color: var(--bg-dark);
+        border-color: var(--accent-cyan);
+      }
+
+      /* --- Pengaturan Area Panorama (sebelah kanan) --- */
+      #panorama {
+        flex-grow: 1;
+      }
+
+      /* === KODE CSS TAMBAHAN UNTUK FITUR YANG HILANG === */
+
+      /* Tombol di pojok kanan atas */
+      .top-buttons {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+        display: flex;
+        gap: 10px;
+      }
+
+      /* GAYA TOMBOL (WARNA DAN FONT) - Disesuaikan dengan Dark Mode */
+      .back-home,
+      .minimap-btn {
+        background-color: var(--panel-dark); /* <-- Pakai warna panel */
+        color: var(--text-light); /* <-- Pakai warna teks terang */
+        border: 1px solid var(--border-dark); /* <-- Pakai warna border */
+        padding: 12px 22px; /* <-- Tetap pakai ukuran besar */
+        border-radius: 8px;
+        cursor: pointer;
+        text-decoration: none;
+        font-family: "Poppins", sans-serif; /* <-- Tetap pakai Poppins */
+        font-size: 16px; /* <-- Tetap pakai ukuran besar */
+        font-weight: bold;
+        transition: all 0.2s ease;
+      }
+      .back-home:hover,
+      .minimap-btn:hover {
+        background-color: var(--accent-cyan); /* <-- Pakai warna aksen */
+        color: var(--bg-dark); /* <-- Pakai warna teks gelap */
+        border-color: var(--accent-cyan);
+      }
+
+      /* Modal untuk Minimap */
+      .minimap-modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .minimap-modal.active {
+        display: flex;
+      }
+      .minimap-img {
+        max-width: 90%;
+        max-height: 90%;
+        border: 3px solid white;
+      }
+
+      /* === KODE CSS UNTUK TAMPILAN MOBILE (RESPONSIF) === */
+      @media (max-width: 768px) {
+        .app {
+          flex-direction: column; /* Mengubah layout menjadi vertikal */
+          height: auto;
+        }
+        #sidebar {
+          width: 100%; /* <-- PENTING: Mengganti 320px di mobile */
+          max-width: 100%;
+          height: auto;
+          max-height: 45vh; /* Batasi tinggi sidebar */
+          overflow-y: auto;
+          padding: 10px;
+          border-right: none; /* Hapus border di mobile */
+          border-bottom: 1px solid var(--border-dark);
+        }
+        #panorama {
+          width: 100%;
+          height: 55vh; /* Panorama mengisi sisa tinggi */
+        }
+        .top-buttons {
+          position: absolute; /* Ganti posisi agar tidak tumpang tindih */
+        }
+      }
+    </style>
   </head>
   <body>
+    <!-- TOMBOL-TOMBOL KONTROL DI KANAN ATAS -->
+    <div class="top-buttons">
+      <a href="index.html" class="back-home">Kembali ke Beranda</a>
+      <button class="minimap-btn" onclick="showMinimap()">
+        Tampilkan Minimap
+      </button>
+      <button id="toggleDragBtn" class="minimap-btn">Nonaktifkan Drag</button>
+    </div>
+
+    <!-- MODAL MINIMAP -->
+    <div id="minimapModal" class="minimap-modal" onclick="hideMinimap()">
+      <!-- GANTI "images/minimap.jpg" DENGAN PATH GAMBAR DENAH ANDA -->
+      <img
+        src="images/minimap.jpg"
+        alt="Minimap Virtual Tour"
+        class="minimap-img"
+      />
+    </div>
+
+    <!-- STRUKTUR UTAMA APLIKASI -->
     <div class="app">
       <aside id="sidebar">
         <h1>Virtual Tour: Rumah Adat Mandar</h1>
@@ -29,79 +259,37 @@
       <main id="panorama"></main>
     </div>
 
+    <!-- SEMUA KODE JAVASCRIPT TETAP SAMA -->
     <script>
-      // === BAGIAN KONFIGURASI PENTING ===
+      // === KONFIGURASI VIRTUAL TOUR ===
       const START_INDEX = 0;
       const END_INDEX = 9;
-
-      // Daftar Nama Scene (TETAP ADA)
       const sceneTitles = [
-        "Halaman Depan", // 0
-        "Naik Tangga", // 1
-        "Ruangan Utama 1", // 2
-        "Ruangan Utama 2", // 3
-        "Teras 1", // 4
-        "Teras 2", // 5
-        "Penghubung (Dapur)", // 6
-        "Dapur", // 7
-        "Tangga Belakang", // 8
-        "Naong Boyang", // 9
+        "Halaman Depan",
+        "Naik Tangga",
+        "Ruangan Utama 1",
+        "Ruangan Utama 2",
+        "Teras 1",
+        "Teras 2",
+        "Penghubung (Dapur)",
+        "Dapur",
+        "Tangga Belakang",
+        "Naong Boyang",
       ];
-
-      // Path file panorama berdasarkan nomor
       const panoPath = (i) => `panos/image${i}.jpg`;
       const sceneId = (i) => `scene-${i}`;
 
-      // Koordinat Yaw & Pitch Anda (TETAP SAMA)
       const overrides = {
-        0: {
-          // Halaman Depan
-          next: { yaw: -147, pitch: 3 }, // Arahkan ke tangga
-        },
-        1: {
-          // Naik Tangga
-          next: { yaw: 3, pitch: 6.3 }, // Arahkan ke pintu Ruangan Utama 1
-          prev: { yaw: -180, pitch: -44 }, // Arahkan kembali ke Halaman Depan
-        },
-        2: {
-          // Ruangan Utama 1
-          next: { yaw: -104, pitch: -1 }, // Arahkan ke Ruangan Utama 2
-          prev: { yaw: 65, pitch: -1.991 }, // Arahkan kembali ke Pintu (Naik Tangga)
-        },
-        3: {
-          // Ruangan Utama 2
-          next: { yaw: -140, pitch: 4 }, // Arahkan ke Teras 1
-          prev: { yaw: 100, pitch: 0 }, // Arahkan kembali ke Ruangan Utama 1
-        },
-        4: {
-          // Teras 1
-          next: { yaw: -5, pitch: -18 }, // Arahkan ke Teras 2
-          prev: { yaw: -128, pitch: -8 }, // Arahkan kembali ke Ruangan Utama 2
-        },
-        5: {
-          // Teras 2
-          next: { yaw: 146, pitch: -1 }, // Arahkan ke Penghubung Dapur
-          prev: { yaw: 173, pitch: -1 }, // Arahkan kembali ke Teras 1
-        },
-        6: {
-          // Penghubung (Dapur)
-          next: { yaw: 175, pitch: -2 }, // Arahkan ke Dapur
-          prev: { yaw: 15, pitch: -4 }, // Arahkan kembali ke Teras 2
-        },
-        7: {
-          // Dapur
-          next: { yaw: -147, pitch: 0 }, // Arahkan ke Tangga Belakang
-          prev: { yaw: -98, pitch: -5 }, // Arahkan kembali ke Penghubung
-        },
-        // Tangga Belakang
-        8: {
-          next: { yaw: -161, pitch: -1 }, // Arahkan ke Naong Boyang
-          prev: { yaw: 2, pitch: 21 }, // Arahkan kembali ke Dapur
-        },
-        // Naong Boyang
-        9: {
-          prev: { yaw: 180, pitch: 0 }, // Arahkan kembali ke Tangga Belakang
-        },
+        0: { next: { yaw: -147, pitch: 3 } },
+        1: { next: { yaw: 3, pitch: 6.3 }, prev: { yaw: -180, pitch: -44 } },
+        2: { next: { yaw: -104, pitch: -1 }, prev: { yaw: 65, pitch: -1.991 } },
+        3: { next: { yaw: -140, pitch: 4 }, prev: { yaw: 100, pitch: 0 } },
+        4: { next: { yaw: -5, pitch: -18 }, prev: { yaw: -128, pitch: -8 } },
+        5: { next: { yaw: 146, pitch: -1 }, prev: { yaw: 173, pitch: -1 } },
+        6: { next: { yaw: 175, pitch: -2 }, prev: { yaw: 15, pitch: -4 } },
+        7: { next: { yaw: -147, pitch: 0 }, prev: { yaw: -98, pitch: -5 } },
+        8: { next: { yaw: -161, pitch: -1 }, prev: { yaw: 2, pitch: 21 } },
+        9: { prev: { yaw: 180, pitch: 0 } },
       };
 
       const config = {
@@ -120,22 +308,7 @@
       for (let i = START_INDEX; i <= END_INDEX; i++) {
         const nextOverride = overrides[i]?.next || {};
         const prevOverride = overrides[i]?.prev || {};
-
-        // Teks hotspot TETAP MENGGUNAKAN NAMA (cth: "Menuju: Naik Tangga")
-        const nextHotspotConfig = {
-          yaw: nextOverride.yaw || 0,
-          pitch: nextOverride.pitch || 0,
-          text: nextOverride.text || `Menuju: ${sceneTitles[i + 1]}`,
-        };
-
-        const prevHotspotConfig = {
-          yaw: prevOverride.yaw || 180,
-          pitch: prevOverride.pitch || 0,
-          text: prevOverride.text || `Kembali ke: ${sceneTitles[i - 1]}`,
-        };
-
         config.scenes[sceneId(i)] = {
-          // Judul scene TETAP MENGGUNAKAN NAMA (cth: "Halaman Depan")
           title: sceneTitles[i] || `Spot ${i}`,
           type: "equirectangular",
           panorama: panoPath(i),
@@ -143,10 +316,10 @@
             ...(i > START_INDEX
               ? [
                   {
-                    yaw: prevHotspotConfig.yaw,
-                    pitch: prevHotspotConfig.pitch,
+                    yaw: prevOverride.yaw || 180,
+                    pitch: prevOverride.pitch || 0,
                     type: "scene",
-                    text: prevHotspotConfig.text,
+                    text: `Kembali ke: ${sceneTitles[i - 1]}`,
                     sceneId: sceneId(i - 1),
                   },
                 ]
@@ -154,10 +327,10 @@
             ...(i < END_INDEX
               ? [
                   {
-                    yaw: nextHotspotConfig.yaw,
-                    pitch: nextHotspotConfig.pitch,
+                    yaw: nextOverride.yaw || 0,
+                    pitch: nextOverride.pitch || 0,
                     type: "scene",
-                    text: nextHotspotConfig.text,
+                    text: `Menuju: ${sceneTitles[i + 1]}`,
                     sceneId: sceneId(i + 1),
                   },
                 ]
@@ -166,24 +339,102 @@
         };
       }
 
-      // Inisialisasi viewer Pannellum
       const viewer = pannellum.viewer("panorama", config);
 
-      // === Logika untuk UI (Sidebar dan Tombol) ===
+      // === FUNGSI UNTUK MINIMAP ===
+      function showMinimap() {
+        document.getElementById("minimapModal").classList.add("active");
+      }
+      function hideMinimap() {
+        document.getElementById("minimapModal").classList.remove("active");
+      }
+
+      // === FUNGSI UNTUK NONAKTIFKAN DRAG & TAMPILKAN KOORDINAT ===
+      const coordDiv = document.createElement("div");
+      Object.assign(coordDiv.style, {
+        position: "fixed",
+        bottom: "24px",
+        right: "24px",
+        background: "var(--panel-dark)",
+        color: "var(--accent-cyan)",
+        padding: "10px 18px",
+        borderRadius: "8px",
+        fontWeight: "bold",
+        zIndex: "2000",
+        fontFamily: "monospace",
+        pointerEvents: "none",
+        border: "1px solid var(--border-dark)",
+      });
+      document.body.appendChild(coordDiv);
+
+      const panoramaEl = document.getElementById("panorama");
+      const toggleBtn = document.getElementById("toggleDragBtn");
+      const viewerContainer = viewer.getContainer();
+      let dragEnabled = true;
+
+      const setCoordHint = (message) => {
+        coordDiv.textContent = message;
+      };
+      const showCoords = (event) => {
+        const coords = viewer.mouseEventToCoords(event);
+        coordDiv.textContent = `Yaw: ${coords[1].toFixed(
+          2
+        )}, Pitch: ${coords[0].toFixed(2)}`;
+      };
+      const handlePointer = (event) => {
+        if (!dragEnabled) {
+          showCoords(event);
+          event.stopPropagation();
+          event.preventDefault();
+        }
+      };
+      const handleScroll = (event) => {
+        if (!dragEnabled) {
+          event.stopPropagation();
+          event.preventDefault();
+        }
+      };
+      const wheelListenerOptions = { capture: true, passive: false };
+
+      function disableDrag() {
+        dragEnabled = false;
+        Object.assign(panoramaEl.style, { cursor: "pointer" });
+        Object.assign(viewerContainer.style, { cursor: "pointer" });
+        viewerContainer.addEventListener("mousedown", handlePointer, true);
+        viewerContainer.addEventListener(
+          "wheel",
+          handleScroll,
+          wheelListenerOptions
+        );
+        toggleBtn.textContent = "Aktifkan Drag";
+        setCoordHint("Mode koordinat aktif — klik panorama");
+      }
+      function enableDrag() {
+        dragEnabled = true;
+        Object.assign(panoramaEl.style, { cursor: "grab" });
+        Object.assign(viewerContainer.style, { cursor: "grab" });
+        viewerContainer.removeEventListener("mousedown", handlePointer, true);
+        viewerContainer.removeEventListener(
+          "wheel",
+          handleScroll,
+          wheelListenerOptions
+        );
+        toggleBtn.textContent = "Nonaktifkan Drag";
+        setCoordHint("Klik panorama untuk koordinat");
+      }
+      toggleBtn.onclick = () => (dragEnabled ? disableDrag() : enableDrag());
+      enableDrag();
+
+      // === LOGIKA UNTUK UI SIDEBAR ===
       const grid = document.getElementById("sceneGrid");
       for (let i = START_INDEX; i <= END_INDEX; i++) {
         const b = document.createElement("button");
         b.className = "scene-btn";
-
-        // === PERUBAHAN SATU-SATUNYA DI SINI ===
-        // Tombol di sidebar diubah menjadi angka (0, 1, 2, ...)
         b.textContent = i;
-
         b.dataset.scene = sceneId(i);
         b.onclick = () => viewer.loadScene(sceneId(i));
         grid.appendChild(b);
       }
-
       const setActive = () => {
         const current = viewer.getScene();
         document.querySelectorAll(".scene-btn").forEach((btn) => {
@@ -193,11 +444,9 @@
       viewer.on("load", setActive);
       setActive();
 
-      // Navigasi tombol prev/next di sidebar
       const idxFromScene = (sid) => parseInt(sid.split("-")[1], 10);
       const prevBtn = document.getElementById("prevBtn");
       const nextBtn = document.getElementById("nextBtn");
-
       prevBtn.onclick = () => {
         const i = idxFromScene(viewer.getScene());
         if (i > START_INDEX) viewer.loadScene(sceneId(i - 1));
