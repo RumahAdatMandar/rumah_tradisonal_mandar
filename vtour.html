@@ -4,20 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Virtual Tour: Rumah Boyang Mandar</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
       rel="stylesheet"
     />
-
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-
     <style>
       :root {
         --bg-dark: #0f172a;
@@ -88,7 +85,7 @@
         box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
       }
       .controls {
-        margin-top: auto;
+        margin-top: 20px; /* ✅ SOLUSI: Mengganti 'auto' dengan nilai spesifik */
         padding-top: 15px;
         border-top: 1px solid var(--border-dark);
         display: flex;
@@ -163,33 +160,25 @@
         border: 3px solid white;
       }
 
-      /* === KODE CSS UNTUK TAMPILAN MOBILE (RESPONSIF) - PERBAIKAN === */
       @media (max-width: 768px) {
         .app {
-          flex-direction: column; /* Mengubah layout menjadi vertikal */
-          height: auto; /* Biarkan tinggi menyesuaikan konten */
+          flex-direction: column;
+          height: auto;
         }
-
         #sidebar {
           width: 100%;
-          flex-shrink: 0;
-          /* INI SOLUSINYA: Mendorong sidebar ke bawah agar tidak tertimpa tombol */
           margin-top: 60px;
-          border-right: none; /* Hapus border di sisi kanan pada mobile */
+          border-right: none;
           border-bottom: 1px solid var(--border-dark);
           box-sizing: border-box;
         }
-
         #panorama {
           width: 100%;
-          /* Beri tinggi yang pasti agar panorama tidak terlalu kecil */
           height: 60vh;
         }
-
         .top-buttons {
-          /* Biarkan absolute agar tetap di atas, tapi tidak fixed saat scroll */
           position: absolute;
-          width: calc(100% - 20px); /* Pastikan lebarnya pas di layar mobile */
+          width: calc(100% - 20px);
           box-sizing: border-box;
         }
       }
@@ -229,38 +218,55 @@
     </div>
 
     <script>
-      // === KONFIGURASI VIRTUAL TOUR ===
-      const START_INDEX = 0;
-      const END_INDEX = 9;
-      const sceneTitles = [
-        "Halaman Depan",
-        "Naik Tangga",
-        "Ruangan Utama 1",
-        "Ruangan Utama 2",
-        "Teras 1",
-        "Teras 2",
-        "Penghubung (Dapur)",
-        "Dapur",
-        "Tangga Belakang",
-        "Naong Boyang",
+      // === KONFIGURASI VIRTUAL TOUR (VERSI SEDERHANA) ===
+      const tourData = [
+        { title: "Halaman Depan", next: { yaw: -147, pitch: 3 } },
+        {
+          title: "Naik Tangga",
+          next: { yaw: 3, pitch: 6.3 },
+          prev: { yaw: -180, pitch: -44 },
+        },
+        {
+          title: "Ruangan Utama 1",
+          next: { yaw: -104, pitch: -1 },
+          prev: { yaw: 65, pitch: -1.991 },
+        },
+        {
+          title: "Ruangan Utama 2",
+          next: { yaw: -140, pitch: 4 },
+          prev: { yaw: 100, pitch: 0 },
+        },
+        {
+          title: "Teras 1",
+          next: { yaw: -5, pitch: -18 },
+          prev: { yaw: -128, pitch: -8 },
+        },
+        {
+          title: "Teras 2",
+          next: { yaw: 146, pitch: -1 },
+          prev: { yaw: 173, pitch: -1 },
+        },
+        {
+          title: "Penghubung (Dapur)",
+          next: { yaw: 175, pitch: -2 },
+          prev: { yaw: 15, pitch: -4 },
+        },
+        {
+          title: "Dapur",
+          next: { yaw: -147, pitch: 0 },
+          prev: { yaw: -98, pitch: -5 },
+        },
+        {
+          title: "Tangga Belakang",
+          next: { yaw: -161, pitch: -1 },
+          prev: { yaw: 2, pitch: 21 },
+        },
+        { title: "Naong Boyang", prev: { yaw: 180, pitch: 0 } },
       ];
-      const panoPath = (i) => `panos/image${i}.jpg`;
-      const sceneId = (i) => `scene-${i}`;
-      const overrides = {
-        0: { next: { yaw: -147, pitch: 3 } },
-        1: { next: { yaw: 3, pitch: 6.3 }, prev: { yaw: -180, pitch: -44 } },
-        2: { next: { yaw: -104, pitch: -1 }, prev: { yaw: 65, pitch: -1.991 } },
-        3: { next: { yaw: -140, pitch: 4 }, prev: { yaw: 100, pitch: 0 } },
-        4: { next: { yaw: -5, pitch: -18 }, prev: { yaw: -128, pitch: -8 } },
-        5: { next: { yaw: 146, pitch: -1 }, prev: { yaw: 173, pitch: -1 } },
-        6: { next: { yaw: 175, pitch: -2 }, prev: { yaw: 15, pitch: -4 } },
-        7: { next: { yaw: -147, pitch: 0 }, prev: { yaw: -98, pitch: -5 } },
-        8: { next: { yaw: -161, pitch: -1 }, prev: { yaw: 2, pitch: 21 } },
-        9: { prev: { yaw: 180, pitch: 0 } },
-      };
+
       const config = {
         default: {
-          firstScene: sceneId(START_INDEX),
+          firstScene: "scene-0",
           autoLoad: true,
           showControls: true,
           compass: false,
@@ -270,46 +276,81 @@
         },
         scenes: {},
       };
-      for (let i = START_INDEX; i <= END_INDEX; i++) {
-        const nextOverride = overrides[i]?.next || {};
-        const prevOverride = overrides[i]?.prev || {};
-        config.scenes[sceneId(i)] = {
-          title: sceneTitles[i] || `Spot ${i}`,
+      tourData.forEach((sceneData, i) => {
+        const sceneId = `scene-${i}`;
+        config.scenes[sceneId] = {
+          title: sceneData.title,
           type: "equirectangular",
-          panorama: panoPath(i),
-          hotSpots: [
-            ...(i > START_INDEX
-              ? [
-                  {
-                    yaw: prevOverride.yaw || 180,
-                    pitch: prevOverride.pitch || 0,
-                    type: "scene",
-                    text: `Kembali ke: ${sceneTitles[i - 1]}`,
-                    sceneId: sceneId(i - 1),
-                  },
-                ]
-              : []),
-            ...(i < END_INDEX
-              ? [
-                  {
-                    yaw: nextOverride.yaw || 0,
-                    pitch: nextOverride.pitch || 0,
-                    type: "scene",
-                    text: `Menuju: ${sceneTitles[i + 1]}`,
-                    sceneId: sceneId(i + 1),
-                  },
-                ]
-              : []),
-          ],
+          panorama: `panos/image${i}.jpg`,
+          hotSpots: [],
         };
-      }
+
+        if (i < tourData.length - 1) {
+          config.scenes[sceneId].hotSpots.push({
+            yaw: sceneData.next?.yaw || 0,
+            pitch: sceneData.next?.pitch || 0,
+            type: "scene",
+            text: `Menuju: ${tourData[i + 1].title}`,
+            sceneId: `scene-${i + 1}`,
+          });
+        }
+        if (i > 0) {
+          config.scenes[sceneId].hotSpots.push({
+            yaw: sceneData.prev?.yaw || 180,
+            pitch: sceneData.prev?.pitch || 0,
+            type: "scene",
+            text: `Kembali ke: ${tourData[i - 1].title}`,
+            sceneId: `scene-${i - 1}`,
+          });
+        }
+      });
+
       const viewer = pannellum.viewer("panorama", config);
-      function showMinimap() {
-        document.getElementById("minimapModal").classList.add("active");
-      }
-      function hideMinimap() {
-        document.getElementById("minimapModal").classList.remove("active");
-      }
+      const minimapModal = document.getElementById("minimapModal");
+      const panoramaEl = document.getElementById("panorama");
+      const toggleBtn = document.getElementById("toggleDragBtn");
+      const grid = document.getElementById("sceneGrid");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      const showMinimap = () => minimapModal.classList.add("active");
+      const hideMinimap = () => minimapModal.classList.remove("active");
+      const setActiveSceneButton = () => {
+        const currentSceneId = viewer.getScene();
+        document.querySelectorAll(".scene-btn").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.scene === currentSceneId);
+        });
+      };
+
+      // Buat tombol scene
+      tourData.forEach((scene, i) => {
+        const sceneId = `scene-${i}`;
+        const btn = document.createElement("button");
+        btn.className = "scene-btn";
+        btn.textContent = i;
+        btn.dataset.scene = sceneId;
+        btn.onclick = () => viewer.loadScene(sceneId);
+        grid.appendChild(btn);
+      });
+
+      // Event listener untuk tombol navigasi
+      const getSceneIndex = (sceneId) => parseInt(sceneId.split("-")[1], 10);
+
+      prevBtn.onclick = () => {
+        const currentIndex = getSceneIndex(viewer.getScene());
+        if (currentIndex > 0) viewer.loadScene(`scene-${currentIndex - 1}`);
+      };
+
+      nextBtn.onclick = () => {
+        const currentIndex = getSceneIndex(viewer.getScene());
+        if (currentIndex < tourData.length - 1)
+          viewer.loadScene(`scene-${currentIndex + 1}`);
+      };
+
+      viewer.on("load", setActiveSceneButton);
+      setActiveSceneButton(); // Set tombol aktif saat pertama kali dimuat
+
+      // === KODE UNTUK FITUR KOORDINAT & DRAG (TIDAK DIUBAH) ===
       const coordDiv = document.createElement("div");
       Object.assign(coordDiv.style, {
         position: "fixed",
@@ -326,10 +367,10 @@
         border: "1px solid var(--border-dark)",
       });
       document.body.appendChild(coordDiv);
-      const panoramaEl = document.getElementById("panorama");
-      const toggleBtn = document.getElementById("toggleDragBtn");
+
       const viewerContainer = viewer.getContainer();
       let dragEnabled = true;
+
       const setCoordHint = (message) => {
         coordDiv.textContent = message;
       };
@@ -339,6 +380,7 @@
           2
         )}, Pitch: ${coords[0].toFixed(2)}`;
       };
+
       const handlePointer = (event) => {
         if (!dragEnabled) {
           showCoords(event);
@@ -346,71 +388,40 @@
           event.preventDefault();
         }
       };
+
       const handleScroll = (event) => {
         if (!dragEnabled) {
           event.stopPropagation();
           event.preventDefault();
         }
       };
+
       const wheelListenerOptions = { capture: true, passive: false };
-      function disableDrag() {
-        dragEnabled = false;
-        Object.assign(panoramaEl.style, { cursor: "pointer" });
-        Object.assign(viewerContainer.style, { cursor: "pointer" });
-        viewerContainer.addEventListener("mousedown", handlePointer, true);
-        viewerContainer.addEventListener("touchstart", handlePointer, true);
-        viewerContainer.addEventListener(
+
+      function updateDragState(enable) {
+        dragEnabled = enable;
+        const cursor = enable ? "grab" : "pointer";
+        const eventAction = enable ? "removeEventListener" : "addEventListener";
+
+        panoramaEl.style.cursor = cursor;
+        viewerContainer.style.cursor = cursor;
+
+        viewerContainer[eventAction]("mousedown", handlePointer, true);
+        viewerContainer[eventAction]("touchstart", handlePointer, true);
+        viewerContainer[eventAction](
           "wheel",
           handleScroll,
           wheelListenerOptions
         );
-        toggleBtn.textContent = "Aktifkan Drag";
-        setCoordHint("Mode koordinat aktif");
-      }
-      function enableDrag() {
-        dragEnabled = true;
-        Object.assign(panoramaEl.style, { cursor: "grab" });
-        Object.assign(viewerContainer.style, { cursor: "grab" });
-        viewerContainer.removeEventListener("mousedown", handlePointer, true);
-        viewerContainer.removeEventListener("touchstart", handlePointer, true);
-        viewerContainer.removeEventListener(
-          "wheel",
-          handleScroll,
-          wheelListenerOptions
+
+        toggleBtn.textContent = enable ? "Nonaktifkan Drag" : "Aktifkan Drag";
+        setCoordHint(
+          enable ? "Klik panorama untuk koordinat" : "Mode koordinat aktif"
         );
-        toggleBtn.textContent = "Nonaktifkan Drag";
-        setCoordHint("Klik panorama untuk koordinat");
       }
-      toggleBtn.onclick = () => (dragEnabled ? disableDrag() : enableDrag());
-      enableDrag();
-      const grid = document.getElementById("sceneGrid");
-      for (let i = START_INDEX; i <= END_INDEX; i++) {
-        const b = document.createElement("button");
-        b.className = "scene-btn";
-        b.textContent = i;
-        b.dataset.scene = sceneId(i);
-        b.onclick = () => viewer.loadScene(sceneId(i));
-        grid.appendChild(b);
-      }
-      const setActive = () => {
-        const current = viewer.getScene();
-        document.querySelectorAll(".scene-btn").forEach((btn) => {
-          btn.classList.toggle("active", btn.dataset.scene === current);
-        });
-      };
-      viewer.on("load", setActive);
-      setActive();
-      const idxFromScene = (sid) => parseInt(sid.split("-")[1], 10);
-      const prevBtn = document.getElementById("prevBtn");
-      const nextBtn = document.getElementById("nextBtn");
-      prevBtn.onclick = () => {
-        const i = idxFromScene(viewer.getScene());
-        if (i > START_INDEX) viewer.loadScene(sceneId(i - 1));
-      };
-      nextBtn.onclick = () => {
-        const i = idxFromScene(viewer.getScene());
-        if (i < END_INDEX) viewer.loadScene(sceneId(i + 1));
-      };
+
+      toggleBtn.onclick = () => updateDragState(!dragEnabled);
+      updateDragState(true); // Aktifkan drag saat awal
     </script>
   </body>
 </html>
