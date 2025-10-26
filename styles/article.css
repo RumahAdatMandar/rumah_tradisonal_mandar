@@ -1,0 +1,155 @@
+:root {
+  --color-primary: #007bff;
+  --color-dark: #121212;
+  --color-text-light: #e0e0e0;
+  --color-text-muted: #aaaaaa;
+  --color-bg-card: #1e1e1e;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-dark);
+  color: var(--color-text-light);
+}
+
+.shell {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
+}
+
+header {
+  background-color: var(--color-bg-card);
+  border-bottom: 2px solid var(--color-primary);
+  padding: 40px 20px;
+  text-align: center;
+}
+header h1 {
+  margin-top: 0;
+  font-size: 2.2em;
+  color: white;
+  letter-spacing: 1px;
+}
+.summary-intro {
+  font-size: 1em;
+  margin-top: 15px;
+  padding: 0 5%;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.content {
+  background-color: var(--color-bg-card);
+  padding: 30px;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+.content h2 {
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 10px;
+  margin-top: 40px;
+  color: var(--color-primary);
+  font-size: 1.8em;
+}
+.content h3 {
+  margin-top: 30px;
+  color: var(--color-text-light);
+  font-size: 1.4em;
+  border-left: 4px solid var(--color-text-muted);
+  padding-left: 10px;
+}
+.content h4 {
+  margin-top: 25px;
+  color: var(--color-text-light);
+  font-size: 1.1em;
+  text-decoration: underline;
+}
+
+.math-formula {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-left: 5px solid #ffaa00;
+  margin: 20px 0;
+  overflow-x: auto;
+  border-radius: 4px;
+  color: #dcdcdc;
+}
+
+figure {
+  margin: 30px 0;
+  text-align: center;
+}
+figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+figcaption {
+  font-style: italic;
+  font-size: 0.9em;
+  color: var(--color-text-muted);
+  margin-top: 10px;
+}
+
+.mini-panorama {
+  width: 100%;
+  height: 400px;
+  margin: 20px 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.page-actions {
+  margin: 20px 0;
+  text-align: right;
+}
+.page-actions a {
+  color: var(--color-primary);
+  text-decoration: none;
+  padding: 8px 15px;
+  border: 1px solid var(--color-primary);
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+.page-actions a:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+  color: var(--color-text-muted);
+  font-size: 0.85em;
+}
+
+ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+li {
+  margin-bottom: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 0.9em;
+}
+th,
+td {
+  border: 1px solid #444;
+  padding: 8px;
+  vertical-align: middle;
+}
+th {
+  background-color: #333;
+}
+.rumus-matematis {
+  text-align: center;
+}

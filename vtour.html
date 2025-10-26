@@ -1,427 +1,414 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Virtual Tour: Rumah Boyang Mandar</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pannellum Tour 0–53 (no loops)</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
     />
-    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    <style>
-      :root {
-        --bg-dark: #0f172a;
-        --panel-dark: #1e293b;
-        --border-dark: #334155;
-        --text-light: #e2e8f0;
-        --text-muted: #94a3b8;
-        --accent-cyan: #22d3ee;
-      }
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Helvetica, Arial, sans-serif;
-        margin: 0;
-        color: var(--text-light);
-        background-color: var(--bg-dark);
-      }
-      .app {
-        display: flex;
-        height: 100vh;
-      }
-      #sidebar {
-        width: 320px;
-        flex-shrink: 0;
-        background-color: var(--panel-dark);
-        padding: 20px;
-        border-right: 1px solid var(--border-dark);
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-      }
-      #sidebar h1 {
-        font-size: 1.6em;
-        margin-top: 0;
-        color: white;
-      }
-      #sidebar .meta {
-        font-size: 0.9em;
-        color: var(--text-muted);
-        border-bottom: 1px solid var(--border-dark);
-        padding-bottom: 15px;
-        margin-bottom: 15px;
-      }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
-        gap: 10px;
-        margin-bottom: 20px;
-      }
-      .scene-btn {
-        padding: 10px;
-        border: 1px solid var(--border-dark);
-        background-color: var(--bg-dark);
-        color: var(--text-light);
-        cursor: pointer;
-        border-radius: 8px;
-        transition: all 0.2s ease-in-out;
-        font-weight: bold;
-      }
-      .scene-btn:hover {
-        transform: translateY(-2px);
-        border-color: var(--accent-cyan);
-        color: white;
-      }
-      .scene-btn.active {
-        background-color: var(--accent-cyan);
-        color: var(--bg-dark);
-        border-color: var(--accent-cyan);
-        box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
-      }
-      .controls {
-        margin-top: 20px; /* ✅ SOLUSI: Mengganti 'auto' dengan nilai spesifik */
-        padding-top: 15px;
-        border-top: 1px solid var(--border-dark);
-        display: flex;
-        justify-content: space-between;
-      }
-      .controls button {
-        width: 48%;
-        padding: 12px;
-        border: 1px solid var(--border-dark);
-        background-color: transparent;
-        color: var(--text-light);
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.2s ease;
-      }
-      .controls button:hover {
-        background-color: var(--accent-cyan);
-        color: var(--bg-dark);
-        border-color: var(--accent-cyan);
-      }
-      #panorama {
-        flex-grow: 1;
-      }
-      .top-buttons {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 1000;
-        display: flex;
-        gap: 10px;
-      }
-      .back-home,
-      .minimap-btn {
-        background-color: var(--panel-dark);
-        color: var(--text-light);
-        border: 1px solid var(--border-dark);
-        padding: 12px 22px;
-        border-radius: 8px;
-        cursor: pointer;
-        text-decoration: none;
-        font-family: "Poppins", sans-serif;
-        font-size: 16px;
-        font-weight: bold;
-        transition: all 0.2s ease;
-      }
-      .back-home:hover,
-      .minimap-btn:hover {
-        background-color: var(--accent-cyan);
-        color: var(--bg-dark);
-        border-color: var(--accent-cyan);
-      }
-      .minimap-modal {
-        display: none;
-        position: fixed;
-        z-index: 2000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-      }
-      .minimap-modal.active {
-        display: flex;
-      }
-      .minimap-img {
-        max-width: 90%;
-        max-height: 90%;
-        border: 3px solid white;
-      }
-
-      @media (max-width: 768px) {
-        .app {
-          flex-direction: column;
-          height: auto;
-        }
-        #sidebar {
-          width: 100%;
-          margin-top: 60px;
-          border-right: none;
-          border-bottom: 1px solid var(--border-dark);
-          box-sizing: border-box;
-        }
-        #panorama {
-          width: 100%;
-          height: 60vh;
-        }
-        .top-buttons {
-          position: absolute;
-          width: calc(100% - 20px);
-          box-sizing: border-box;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="styles/vtour.css" />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"
+    ></script>
   </head>
   <body>
-    <div class="top-buttons">
-      <a href="index.html" class="back-home">Kembali ke Beranda</a>
-      <button class="minimap-btn" onclick="showMinimap()">
-        Tampilkan Minimap
-      </button>
-      <button id="toggleDragBtn" class="minimap-btn">Nonaktifkan Drag</button>
+    <div class="top-bar">
+      <a href="index.html" class="go-home">← Kembali ke Beranda</a>
+      <h3 class="page-title">Pannellum Virtual Tour (Scenes 0 → 9)</h3>
+      <div class="top-bar__actions">
+        <button class="minimap-btn" onclick="showMinimap()">
+          Tampilkan Minimap
+        </button>
+        <button id="toggleDragBtn" class="minimap-btn">Nonaktifkan Drag</button>
+      </div>
     </div>
 
+    <!-- Modal Minimap -->
     <div id="minimapModal" class="minimap-modal" onclick="hideMinimap()">
       <img
-        src="images/minimap.jpg"
+        src="assets/images/minimap.jpg"
         alt="Minimap Virtual Tour"
         class="minimap-img"
       />
     </div>
 
-    <div class="app">
-      <aside id="sidebar">
-        <h1>Virtual Tour: Rumah Adat Mandar</h1>
-        <p class="meta">
-          Jelajahi setiap sudut Rumah Adat Mandar (Boyang).<br />
-          Klik pada salah satu titik di bawah untuk langsung menuju lokasi.
-        </p>
-        <div id="sceneGrid" class="grid"></div>
-        <div class="controls">
-          <button id="prevBtn" title="Scene sebelumnya">◀ Sebelumnya</button>
-          <button id="nextBtn" title="Scene berikutnya">Berikutnya ▶</button>
-        </div>
-      </aside>
-      <main id="panorama"></main>
+    <div id="panorama"></div>
+    <div class="scenes">
+      <!-- Static scene buttons without any loop -->
+      <button onclick="viewer.loadScene('s0')">0</button>
+      <button onclick="viewer.loadScene('s1')">1</button>
+      <button onclick="viewer.loadScene('s2')">2</button>
+      <button onclick="viewer.loadScene('s3')">3</button>
+      <button onclick="viewer.loadScene('s4')">4</button>
+      <button onclick="viewer.loadScene('s5')">5</button>
+      <button onclick="viewer.loadScene('s6')">6</button>
+      <button onclick="viewer.loadScene('s7')">7</button>
+      <button onclick="viewer.loadScene('s8')">8</button>
+      <button onclick="viewer.loadScene('s9')">9</button>
     </div>
 
     <script>
-      // === KONFIGURASI VIRTUAL TOUR (VERSI SEDERHANA) ===
-      const tourData = [
-        { title: "Halaman Depan", next: { yaw: -147, pitch: 3 } },
-        {
-          title: "Naik Tangga",
-          next: { yaw: 3, pitch: 6.3 },
-          prev: { yaw: -180, pitch: -44 },
-        },
-        {
-          title: "Ruangan Utama 1",
-          next: { yaw: -104, pitch: -1 },
-          prev: { yaw: 65, pitch: -1.991 },
-        },
-        {
-          title: "Ruangan Utama 2",
-          next: { yaw: -140, pitch: 4 },
-          prev: { yaw: 100, pitch: 0 },
-        },
-        {
-          title: "Ruangan 3/teras belakang",
-          next: { yaw: -5, pitch: -18 },
-          prev: { yaw: -128, pitch: -8 },
-        },
-        {
-          title: "Ruangan 4/teras belakang",
-          next: { yaw: 146, pitch: -1 },
-          prev: { yaw: 173, pitch: -1 },
-        },
-        {
-          title: "Penghubung (Dapur)",
-          next: { yaw: 175, pitch: -2 },
-          prev: { yaw: 15, pitch: -4 },
-        },
-        {
-          title: "Dapur",
-          next: { yaw: -147, pitch: 0 },
-          prev: { yaw: -98, pitch: -5 },
-        },
-        {
-          title: "Tangga Belakang",
-          next: { yaw: -161, pitch: -1 },
-          prev: { yaw: 2, pitch: 21 },
-        },
-        { title: "Naong Boyang", prev: { yaw: 180, pitch: 0 } },
-      ];
+      // function renderAlertHotspot(hotSpotDiv, args) {
+      //   hotSpotDiv.classList.add('custom-hotspot');
 
-      const config = {
+      //   if (args) {
+      //     const tooltip = document.createElement('span');
+      //     tooltip.textContent = args;
+      //     hotSpotDiv.appendChild(tooltip);
+      //   }
+      // }
+
+      /*
+        // === Generator otomatis hotspot ===
+        // const LAST_SCENE_INDEX = 53;
+        // const scenes = {};
+        // for (let i = 0; i <= LAST_SCENE_INDEX; i += 1) {
+        //   const sceneId = `s${i}`;
+        //   const entry = {
+        //     title: `Spot ${i}`,
+        //     type: "equirectangular",
+        //     panorama: `panos/image${i}.jpg`
+        //   };
+        //   if (i < LAST_SCENE_INDEX) {
+        //     entry.hotSpots = [{
+        //       pitch: 0,
+        //       yaw: 0,
+        //       type: "scene",
+        //       sceneId: `s${i + 1}`,
+        //       text: `Ke Spot ${i + 1}`
+        //     }];
+        //   }
+        //   scenes[sceneId] = entry;
+        // }
+        // var viewer = pannellum.viewer('panorama', {
+        //   "default": {
+        //     "firstScene": "s0",
+        //     "autoLoad": true,
+        //     "showControls": true
+        //   },
+        //   "scenes": scenes
+        // });
+      */
+
+      // === Konfigurasi manual dengan hotspot eksplisit ===
+      var viewer = pannellum.viewer("panorama", {
         default: {
-          firstScene: "scene-0",
+          firstScene: "s0",
           autoLoad: true,
           showControls: true,
-          compass: false,
-          hfov: 110,
-          keyboardZoom: true,
-          hotSpotDebug: true,
         },
-        scenes: {},
-      };
-      tourData.forEach((sceneData, i) => {
-        const sceneId = `scene-${i}`;
-        config.scenes[sceneId] = {
-          title: sceneData.title,
-          type: "equirectangular",
-          panorama: `panos/image${i}.jpg`,
-          hotSpots: [],
-        };
-
-        if (i < tourData.length - 1) {
-          config.scenes[sceneId].hotSpots.push({
-            yaw: sceneData.next?.yaw || 0,
-            pitch: sceneData.next?.pitch || 0,
-            type: "scene",
-            text: `Menuju: ${tourData[i + 1].title}`,
-            sceneId: `scene-${i + 1}`,
-          });
-        }
-        if (i > 0) {
-          config.scenes[sceneId].hotSpots.push({
-            yaw: sceneData.prev?.yaw || 180,
-            pitch: sceneData.prev?.pitch || 0,
-            type: "scene",
-            text: `Kembali ke: ${tourData[i - 1].title}`,
-            sceneId: `scene-${i - 1}`,
-          });
-        }
+        scenes: {
+          s0: {
+            title: "Spot 0",
+            type: "equirectangular",
+            pitch: 13.53,
+            yaw: -173.1,
+            panorama: "assets/360_images/image0.jpg",
+            hotSpots: [
+              {
+                pitch: 1,
+                yaw: -147.39,
+                type: "scene",
+                sceneId: "s1",
+                text: "Ke Tangga",
+              },
+              {
+                pitch: 36,
+                yaw: 177,
+                type: "info",
+                text: 'Timpalaja-Ada satu keunikan lain dalam struktur bola ugi di antara dinding dan atap. Terdapat bidang segitiga atau gevel (gable) yang disebut timpalaja. Dengan bagian timpalaja yang dipasang bersusun ini bisa diketahui status sosial pemilik rumah. Jika timpalaja memiliki tiga atau lima susun, maka tandanya pemilik rumah berasal dari golongan elite. Namun jika timpalaja hanya terdiri dari satu atau dua susun, berarti pemilik rumah berasal dari kalangan biasa. Meski demikian, penggunaan timpalaja untuk menunjukkan status sosial pada masa kini sudah tidak seketat pada zaman dahulu dan jumlah susunannya sudah tidak lagi harus selalu sesuai dengan status sosial. Masyarakat dari segala kalangan dapat memasang timpalaja dengan susunan yang sesuai keinginan.<br><br><em>Sumber:</em> <a href="https://id.wikipedia.org/wiki/Bola_Ugi#cite_note-5" target="_blank" rel="noopener noreferrer">Wikipedia - Bola Ugi</a>',
+                URL: "https://id.wikipedia.org/wiki/Bola_Ugi#cite_note-5",
+              },
+              {
+                pitch: -7.93,
+                yaw: 170,
+                type: "info",
+                text: "Bunga",
+              },
+              {
+                pitch: -14.16,
+                yaw: -76.75,
+                type: "info",
+                text: "Motor",
+              },
+              {
+                pitch: -4.23,
+                yaw: 27,
+                type: "info",
+                text: "Papan Nama Rumah Adat",
+              },
+            ],
+          },
+          s1: {
+            title: "Tangga",
+            type: "equirectangular",
+            panorama: "assets/360_images/image1.jpg",
+            hotSpots: [
+              {
+                pitch: 0,
+                yaw: 0,
+                type: "scene",
+                sceneId: "s2",
+                text: "Naik Tangga",
+              },
+            ],
+          },
+          s2: {
+            title: "Ruang utama 1",
+            type: "equirectangular",
+            pitch: -1.81,
+            yaw: 88.31,
+            panorama: "assets/360_images/image2.jpg",
+            hotSpots: [
+              {
+                pitch: -1.81,
+                yaw: 80,
+                type: "scene",
+                sceneId: "s3",
+                text: "Ke Spot 3",
+              },
+            ],
+          },
+          s3: {
+            title: "Spot 3",
+            type: "equirectangular",
+            pitch: -0.05,
+            yaw: -152.57,
+            panorama: "assets/360_images/image3.jpg",
+            hotSpots: [
+              {
+                pitch: -0.05,
+                yaw: -95.57,
+                type: "scene",
+                sceneId: "s4",
+                text: "Ke Spot 4",
+              },
+            ],
+          },
+          s4: {
+            title: "Spot 4",
+            type: "equirectangular",
+            pitch: 0,
+            yaw: 150,
+            panorama: "assets/360_images/image4.jpg",
+            hotSpots: [
+              {
+                pitch: 0,
+                yaw: 170,
+                type: "scene",
+                sceneId: "s5",
+                text: "Ke Spot 5",
+              },
+            ],
+          },
+          s5: {
+            title: "Spot 5",
+            type: "equirectangular",
+            panorama: "assets/360_images/image5.jpg",
+            hotSpots: [
+              {
+                pitch: -8,
+                yaw: 39,
+                type: "scene",
+                sceneId: "s6",
+                text: "Ke Spot 6",
+              },
+            ],
+          },
+          s6: {
+            title: "Spot 6",
+            type: "equirectangular",
+            pitch: 0,
+            yaw: 168.69,
+            panorama: "assets/360_images/image6.jpg",
+            hotSpots: [
+              {
+                pitch: 0,
+                yaw: 169,
+                type: "scene",
+                sceneId: "s7",
+                text: "Ke Spot 7",
+              },
+            ],
+          },
+          s7: {
+            title: "Spot 7",
+            type: "equirectangular",
+            pitch: 0,
+            yaw: 158.69,
+            panorama: "assets/360_images/image7.jpg",
+            hotSpots: [
+              {
+                pitch: 0,
+                yaw: -146,
+                type: "scene",
+                sceneId: "s8",
+                text: "Ke Spot 8",
+              },
+            ],
+          },
+          s8: {
+            title: "Spot 8",
+            type: "equirectangular",
+            panorama: "assets/360_images/image8.jpg",
+            hotSpots: [
+              {
+                pitch: -6.59,
+                yaw: -56,
+                type: "scene",
+                sceneId: "s9",
+                text: "Ke Spot 9",
+              },
+            ],
+          },
+          s9: {
+            title: "Spot 9",
+            type: "equirectangular",
+            pitch: 0,
+            yaw: -50.69,
+            panorama: "assets/360_images/image9.jpg",
+            hotSpots: [
+              {
+                pitch: 0,
+                yaw: -59.7,
+                type: "scene",
+                sceneId: "s0",
+                text: "Ke Spot 0",
+              },
+            ],
+          },
+        },
       });
 
-      const viewer = pannellum.viewer("panorama", config);
-      const minimapModal = document.getElementById("minimapModal");
+      // Fungsi untuk menampilkan modal minimap
+      function showMinimap() {
+        document.getElementById("minimapModal").classList.add("active");
+      }
+      function hideMinimap() {
+        document.getElementById("minimapModal").classList.remove("active");
+      }
+
+      // === Menampilkan koordinat pitch dan yaw saat panorama di-klik ===
       const panoramaEl = document.getElementById("panorama");
-      const toggleBtn = document.getElementById("toggleDragBtn");
-      const grid = document.getElementById("sceneGrid");
-      const prevBtn = document.getElementById("prevBtn");
-      const nextBtn = document.getElementById("nextBtn");
-
-      const showMinimap = () => minimapModal.classList.add("active");
-      const hideMinimap = () => minimapModal.classList.remove("active");
-      const setActiveSceneButton = () => {
-        const currentSceneId = viewer.getScene();
-        document.querySelectorAll(".scene-btn").forEach((btn) => {
-          btn.classList.toggle("active", btn.dataset.scene === currentSceneId);
-        });
-      };
-
-      // Buat tombol scene
-      tourData.forEach((scene, i) => {
-        const sceneId = `scene-${i}`;
-        const btn = document.createElement("button");
-        btn.className = "scene-btn";
-        btn.textContent = i;
-        btn.dataset.scene = sceneId;
-        btn.onclick = () => viewer.loadScene(sceneId);
-        grid.appendChild(btn);
-      });
-
-      // Event listener untuk tombol navigasi
-      const getSceneIndex = (sceneId) => parseInt(sceneId.split("-")[1], 10);
-
-      prevBtn.onclick = () => {
-        const currentIndex = getSceneIndex(viewer.getScene());
-        if (currentIndex > 0) viewer.loadScene(`scene-${currentIndex - 1}`);
-      };
-
-      nextBtn.onclick = () => {
-        const currentIndex = getSceneIndex(viewer.getScene());
-        if (currentIndex < tourData.length - 1)
-          viewer.loadScene(`scene-${currentIndex + 1}`);
-      };
-
-      viewer.on("load", setActiveSceneButton);
-      setActiveSceneButton(); // Set tombol aktif saat pertama kali dimuat
-
-      // === KODE UNTUK FITUR KOORDINAT & DRAG (TIDAK DIUBAH) ===
       const coordDiv = document.createElement("div");
-      Object.assign(coordDiv.style, {
-        position: "fixed",
-        bottom: "24px",
-        right: "24px",
-        background: "var(--panel-dark)",
-        color: "var(--accent-cyan)",
-        padding: "10px 18px",
-        borderRadius: "8px",
-        fontWeight: "bold",
-        zIndex: "2000",
-        fontFamily: "monospace",
-        pointerEvents: "none",
-        border: "1px solid var(--border-dark)",
-      });
-      document.body.appendChild(coordDiv);
+      coordDiv.className = "coord-hint";
+      coordDiv.textContent = "Klik panorama untuk koordinat";
+      if (panoramaEl) {
+        panoramaEl.appendChild(coordDiv);
+      } else {
+        document.body.appendChild(coordDiv);
+      }
+      const toggleBtn = document.getElementById("toggleDragBtn");
+      const viewerContainer =
+        typeof viewer.getContainer === "function"
+          ? viewer.getContainer()
+          : panoramicFallback();
 
-      const viewerContainer = viewer.getContainer();
       let dragEnabled = true;
 
-      const setCoordHint = (message) => {
-        coordDiv.textContent = message;
-      };
-      const showCoords = (event) => {
-        const coords = viewer.mouseEventToCoords(event);
-        coordDiv.textContent = `Yaw: ${coords[1].toFixed(
-          2
-        )}, Pitch: ${coords[0].toFixed(2)}`;
-      };
+      function panoramicFallback() {
+        return panoramaEl.querySelector(".pnlm-container") || panoramaEl;
+      }
 
-      const handlePointer = (event) => {
+      function setCoordHint(message) {
+        coordDiv.textContent = message;
+      }
+
+      function showCoords(event) {
+        const coords = viewer.mouseEventToCoords(event);
+        if (
+          coords &&
+          Number.isFinite(coords.yaw) &&
+          Number.isFinite(coords.pitch)
+        ) {
+          coordDiv.textContent = `Yaw: ${coords.yaw.toFixed(
+            2
+          )}, Pitch: ${coords.pitch.toFixed(2)}`;
+        } else {
+          const fallbackYaw =
+            typeof viewer.getYaw === "function" ? viewer.getYaw() : NaN;
+          const fallbackPitch =
+            typeof viewer.getPitch === "function" ? viewer.getPitch() : NaN;
+          if (Number.isFinite(fallbackYaw) && Number.isFinite(fallbackPitch)) {
+            coordDiv.textContent = `Yaw: ${fallbackYaw.toFixed(
+              2
+            )}, Pitch: ${fallbackPitch.toFixed(2)}`;
+          } else {
+            setCoordHint("Tidak dapat membaca koordinat");
+          }
+        }
+      }
+
+      function handlePointer(event) {
         if (!dragEnabled) {
           showCoords(event);
           event.stopPropagation();
           event.preventDefault();
         }
-      };
+      }
 
-      const handleScroll = (event) => {
+      function handleScroll(event) {
         if (!dragEnabled) {
           event.stopPropagation();
           event.preventDefault();
         }
-      };
+      }
 
       const wheelListenerOptions = { capture: true, passive: false };
 
-      function updateDragState(enable) {
-        dragEnabled = enable;
-        const cursor = enable ? "grab" : "pointer";
-        const eventAction = enable ? "removeEventListener" : "addEventListener";
-
-        panoramaEl.style.cursor = cursor;
-        viewerContainer.style.cursor = cursor;
-
-        viewerContainer[eventAction]("mousedown", handlePointer, true);
-        viewerContainer[eventAction]("touchstart", handlePointer, true);
-        viewerContainer[eventAction](
+      function disableDrag() {
+        dragEnabled = false;
+        panoramaEl.style.cursor = "pointer";
+        viewerContainer.style.cursor = "pointer";
+        viewerContainer.addEventListener("mousedown", handlePointer, true);
+        viewerContainer.addEventListener("touchstart", handlePointer, true);
+        viewerContainer.addEventListener("click", handlePointer, true);
+        viewerContainer.addEventListener("touchend", handlePointer, true);
+        viewerContainer.addEventListener(
           "wheel",
           handleScroll,
           wheelListenerOptions
         );
-
-        toggleBtn.textContent = enable ? "Nonaktifkan Drag" : "Aktifkan Drag";
-        setCoordHint(
-          enable ? "Klik panorama untuk koordinat" : "Mode koordinat aktif"
-        );
+        toggleBtn.textContent = "Aktifkan Drag";
+        setCoordHint("Mode koordinat aktif — klik panorama");
       }
 
-      toggleBtn.onclick = () => updateDragState(!dragEnabled);
-      updateDragState(true); // Aktifkan drag saat awal
+      function enableDrag() {
+        dragEnabled = true;
+        panoramaEl.style.cursor = "grab";
+        viewerContainer.style.cursor = "grab";
+        viewerContainer.removeEventListener("mousedown", handlePointer, true);
+        viewerContainer.removeEventListener("touchstart", handlePointer, true);
+        viewerContainer.removeEventListener("click", handlePointer, true);
+        viewerContainer.removeEventListener("touchend", handlePointer, true);
+        viewerContainer.removeEventListener(
+          "wheel",
+          handleScroll,
+          wheelListenerOptions
+        );
+        toggleBtn.textContent = "Nonaktifkan Drag";
+        setCoordHint("Klik panorama untuk koordinat");
+      }
+
+      toggleBtn.onclick = function () {
+        if (dragEnabled) {
+          disableDrag();
+        } else {
+          enableDrag();
+        }
+      };
+
+      // Set cursor awal dan pesan bawaan
+      enableDrag();
+
+      document.addEventListener("click", () => {
+        document
+          .querySelectorAll(".hotspot-alert.is-open")
+          .forEach((node) => node.classList.remove("is-open"));
+      });
     </script>
   </body>
 </html>

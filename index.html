@@ -1,16 +1,50 @@
 <!DOCTYPE html>
 <html lang="id">
   <head>
-    <meta charset="utf-9" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rumah Adat Mandar– Tur Virtual</title>
-    <link rel="stylesheet" href="css/index.css" />
+    <title>Rumah Adat Mandar – Tur Virtual</title>
+    <link rel="stylesheet" href="styles/index.css" />
   </head>
   <body>
+    <!--
+        Theme controls UI (commented out per request; keep for future use)
+        <div class="theme-menu" aria-label="Pengaturan tema warna">
+            <button type="button" class="theme-menu__toggle" data-theme-toggle aria-expanded="false">
+                Tema
+            </button>
+            <form class="theme-menu__panel" data-theme-panel hidden>
+                <fieldset>
+                    <legend>Warna Latar</legend>
+                    <label>
+                        <span>Latar Utama</span>
+                        <input type="color" name="--bg" value="#0b1020">
+                    </label>
+                    <label>
+                        <span>Panel</span>
+                        <input type="color" name="--panel" value="#111831">
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Kontras</legend>
+                    <label>
+                        <span>Teks</span>
+                        <input type="color" name="--ink" value="#e6edf3">
+                    </label>
+                    <label>
+                        <span>Aksen</span>
+                        <input type="color" name="--accent" value="#22d3ee">
+                    </label>
+                </fieldset>
+                <button type="button" class="theme-menu__reset" data-theme-reset>Reset</button>
+            </form>
+        </div>
+    -->
+
     <header>
       <!-- Place the image file at ./images/images_mapping.jpg or adjust the src below -->
       <img
-        src="images/main_img.jpg"
+        src="assets/images/main_img.jpg"
         alt="Rumah Adat Mandar – tampak atas beranotasi"
       />
       <div class="hero">
@@ -27,18 +61,65 @@
           sebagai balai adat, pusat kegiatan komunal seperti musyawarah, upacara
           adat, dan penyambutan tamu kehormatan.
         </p>
-        <div class="cta">
-          <a class="primary" href="vtour.html">Masuk ke Tur Virtual</a>
-          <a class="secondary" href="article.html">Baca Artikel Matematika</a>
-        </div>
       </div>
     </header>
 
+    <section class="cta-section">
+      <div class="cta-container">
+        <article class="cta-card">
+          <span class="cta-icon" aria-hidden="true">🧭</span>
+          <h3>Tur Virtual</h3>
+          <p>
+            Masuki panorama 360° Boyang Mandar dan jelajahi seluruh titik
+            orientasi.
+          </p>
+          <a class="cta-button" href="vtour.html">Masuk Tur</a>
+        </article>
+        <article class="cta-card">
+          <span class="cta-icon" aria-hidden="true">📘</span>
+          <h3>Artikel Matematika</h3>
+          <p>
+            Pahami konsep geometri, proporsi, dan struktur numerik pada Baruga.
+          </p>
+          <a class="cta-button" href="article.html">Baca Artikel</a>
+        </article>
+        <article class="cta-card">
+          <span class="cta-icon" aria-hidden="true">📐</span>
+          <h3>Projective Geometry</h3>
+          <p>
+            Telusuri analisis proyektif untuk memetakan hubungan ruang Baruga.
+          </p>
+          <a class="cta-button" href="math.html#projective-geometry"
+            >Pelajari</a
+          >
+        </article>
+        <article class="cta-card">
+          <span class="cta-icon" aria-hidden="true">🏗️</span>
+          <h3>3D Desain</h3>
+          <p>
+            Lihat model 3D Bugis Traditional House untuk detail konstruksi
+            autentik.
+          </p>
+          <a
+            class="cta-button"
+            href="https://sketchfab.com/3d-models/bugis-traditionals-house-d85593bc47784f899d461a92c33bfca4"
+            >Lihat Model</a
+          >
+        </article>
+      </div>
+    </section>
+
     <main>
       <section class="card">
-        <h2>Tentang Boyang Mandar</h2>
+        <h2>Tentang Boyang</h2>
         <p>
-          <strong>Boyang Mandar</strong>
+          <strong>Boyang</strong> adalah sebutan balai adat/rumah besar di
+          kawasan Sulawesi yang digunakan sebagai ruang komunal. Secara
+          arsitektural, Boyang Mandar umumnya bertipe rumah panggung dengan
+          struktur kolom kayu, lantai papan, dan kolong yang berfungsi untuk
+          sirkulasi, penyimpanan, serta meredam kelembapan. Bidang atapnya lebar
+          untuk melindungi serambi dan jalur sirkulasi, sementara bukaan silang
+          memungkinkan ventilasi alami yang baik.
         </p>
         <p>
           Dalam konteks budaya, Boyang merupakan simbol kebersamaan yang sakral.
@@ -66,5 +147,89 @@
     <footer>
       © 2025 · Tur Virtual Rumah Adat Mandar · Dibangun dengan Pannellum 360°
     </footer>
+
+    <!--
+        Theme control script (commented out per request; leave in place for later reactivation)
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const root = document.documentElement;
+                const menu = document.querySelector(".theme-menu");
+                if (!menu) return;
+
+                const toggle = menu.querySelector("[data-theme-toggle]");
+                const panel = menu.querySelector("[data-theme-panel]");
+                const reset = menu.querySelector("[data-theme-reset]");
+                if (!toggle || !panel || !reset) return;
+                const colorInputs = Array.from(panel.querySelectorAll('input[type="color"]'));
+                const storageKey = "baruga-theme-overrides";
+                const defaults = Object.fromEntries(colorInputs.map((input) => [input.name, input.value]));
+
+                const applyTheme = (map) => {
+                    Object.entries(map).forEach(([token, color]) => {
+                        if (!color) return;
+                        root.style.setProperty(token, color);
+                    });
+                };
+
+                const hydrateInputs = (map) => {
+                    colorInputs.forEach((input) => {
+                        if (map[input.name]) {
+                            input.value = map[input.name];
+                        }
+                    });
+                };
+
+                const saved = localStorage.getItem(storageKey);
+                if (saved) {
+                    try {
+                        const parsed = JSON.parse(saved);
+                        applyTheme(parsed);
+                        hydrateInputs(parsed);
+                    } catch (error) {
+                        console.warn("Gagal memuat tema tersimpan:", error);
+                    }
+                }
+
+                toggle.addEventListener("click", () => {
+                    const willOpen = panel.hasAttribute("hidden");
+                    if (willOpen) {
+                        panel.removeAttribute("hidden");
+                    } else {
+                        panel.setAttribute("hidden", "");
+                    }
+                    toggle.setAttribute("aria-expanded", String(willOpen));
+                });
+
+                panel.addEventListener("input", (event) => {
+                    if (!(event.target instanceof HTMLInputElement)) return;
+                    if (event.target.type !== "color") return;
+
+                    const token = event.target.name;
+                    const color = event.target.value;
+                    root.style.setProperty(token, color);
+
+                    const current = (() => {
+                        try {
+                            return JSON.parse(localStorage.getItem(storageKey) ?? "{}");
+                        } catch (_) {
+                            return {};
+                        }
+                    })();
+
+                    current[token] = color;
+                    localStorage.setItem(storageKey, JSON.stringify(current));
+                });
+
+                    reset.addEventListener("click", () => {
+                    colorInputs.forEach((input) => {
+                        const defaultColor = defaults[input.name];
+                        input.value = defaultColor;
+                        root.style.removeProperty(input.name);
+                    });
+                    localStorage.removeItem(storageKey);
+                });
+            });
+        </script>
+    -->
   </body>
 </html>

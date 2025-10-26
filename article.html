@@ -4,15 +4,174 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Aspek Matematika dalam Rumah Adat Mandar (Boyang)</title>
+    <meta
+      name="description"
+      content="Kajian etnomatematika pada arsitektur Rumah Adat Boyang Suku Mandar, menggali konsep geometri, proporsi, dan filosofi budaya."
+    />
 
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
     />
 
-    <link rel="stylesheet" href="css/article.css" />
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+        },
+      };
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      defer
+    ></script>
+
     <style>
-      /* Style Tabel */
+      /* Gaya dari contoh Balla Lompoa */
+      :root {
+        --color-primary: #007bff;
+        --color-dark: #121212;
+        --color-text-light: #e0e0e0;
+        --color-text-muted: #aaaaaa;
+        --color-bg-card: #1e1e1e;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: var(--color-dark);
+        color: var(--color-text-light);
+      }
+
+      .shell {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 20px 40px;
+      }
+
+      header {
+        background-color: var(--color-bg-card);
+        border-bottom: 2px solid var(--color-primary);
+        padding: 40px 20px;
+        text-align: center;
+      }
+      header h1 {
+        margin-top: 0;
+        font-size: 2.2em;
+        color: white;
+        letter-spacing: 1px;
+      }
+      .summary-intro {
+        font-size: 1em;
+        margin-top: 15px;
+        padding: 0 5%;
+        color: var(--color-text-muted);
+        font-style: italic;
+      }
+
+      .content {
+        background-color: var(--color-bg-card);
+        padding: 30px;
+        border-radius: 8px;
+        margin-top: 30px;
+      }
+      .content h2 {
+        border-bottom: 2px solid var(--color-primary);
+        padding-bottom: 10px;
+        margin-top: 40px;
+        color: var(--color-primary);
+        font-size: 1.8em;
+      }
+      .content h3 {
+        margin-top: 30px;
+        color: var(--color-text-light);
+        font-size: 1.4em;
+        border-left: 4px solid var(--color-text-muted);
+        padding-left: 10px;
+      }
+      .content h4 {
+        margin-top: 25px;
+        color: var(--color-text-light);
+        font-size: 1.1em;
+        text-decoration: underline;
+      }
+
+      .math-formula {
+        background-color: #2a2a2a;
+        padding: 20px;
+        border-left: 5px solid #ffaa00;
+        margin: 20px 0;
+        overflow-x: auto;
+        border-radius: 4px;
+        color: #dcdcdc;
+      }
+
+      figure {
+        margin: 30px 0;
+        text-align: center;
+      }
+      figure img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 6px;
+      }
+      figcaption {
+        font-style: italic;
+        font-size: 0.9em;
+        color: var(--color-text-muted);
+        margin-top: 10px;
+      }
+
+      .mini-panorama {
+        width: 100%;
+        height: 400px;
+        margin: 20px 0;
+        border-radius: 6px;
+        overflow: hidden;
+      }
+
+      .page-actions {
+        margin: 20px 0;
+        text-align: right;
+      }
+      .page-actions a {
+        color: var(--color-primary);
+        text-decoration: none;
+        padding: 8px 15px;
+        border: 1px solid var(--color-primary);
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+      .page-actions a:hover {
+        background-color: var(--color-primary);
+        color: white;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 30px;
+        color: var(--color-text-muted);
+        font-size: 0.85em;
+      }
+
+      ul {
+        list-style: disc;
+        margin-left: 20px;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+
       table {
         width: 100%;
         border-collapse: collapse;
@@ -21,531 +180,423 @@
       }
       th,
       td {
-        border: 1px solid #ddd;
+        border: 1px solid #444;
         padding: 8px;
-        text-align: left;
         vertical-align: middle;
       }
       th {
-        background-color: #504f4f;
+        background-color: #333;
       }
-      /* Style untuk kolom Rumus agar rapi */
       .rumus-matematis {
-        font-family: "Times New Roman", Times, serif;
-        font-size: 1.1em;
         text-align: center;
-        background-color: #646060;
-        white-space: nowrap;
       }
-      #mini-panorama,
-      #mini-panorama-2 {
-        width: 100%;
-        height: 400px;
-        background-color: #f0f0f0;
-      }
-      pre {
-        background-color: #2b2b2b;
-        color: #f8f8f2;
-        padding: 15px;
-        border-radius: 5px;
-        overflow-x: auto;
-      }
-      code {
-        font-family: "Courier New", Courier, monospace;
-        line-height: 1.5;
+      .bibliografi p {
+        margin-bottom: 1rem; /* Memberi jarak antar paragraf */
+        line-height: 1.6;
       }
     </style>
   </head>
   <body>
     <header>
       <h1>Aspek Matematika dalam Rumah Adat Mandar (Boyang)</h1>
-      <div class="muted">
-        Mempelajari keterkaitan antara desain dan struktur matematika dalam
-        arsitektur Rumah Boyang Suku Mandar.
-      </div>
+      <p class="summary-intro">
+        Rumah Adat "Boyang" Suku Mandar adalah manifestasi nyata etnomatematika,
+        di mana kearifan budaya dan kecerdasan matematis menyatu.
+      </p>
     </header>
 
-    <div class="shell">
+    <main class="shell">
       <div class="page-actions">
         <a class="back-home" href="index.html">← Kembali ke Beranda</a>
       </div>
-      <div class="content">
-        <h2>Pendahuluan</h2>
-        <p>
-          Rumah Adat "Boyang" Suku Mandar bukanlah sekadar struktur kayu yang
-          berdiri megah, melainkan sebuah manifestasi nyata dari etnomatematika
-          sebuah jembatan di mana kearifan budaya dan kecerdasan matematis
-          menyatu secara harmonis. Di balik wujudnya yang tampak begitu alami
-          dan menyatu dengan lingkungan pesisir, tersimpan sebuah sistem
-          konstruksi yang terencana dengan presisi luar biasa. Setiap sudut,
-          tiang, dan sambungan pada Boyang bukanlah hasil kebetulan, melainkan
-          buah dari perhitungan cermat yang diwariskan secara turun-temurun.
-          Disinilah letak keistimewaannya unsur-unsur matematika tidak hanya
-          hadir sebagai elemen teknis untuk memastikan kekuatan bangunan, tetapi
-          juga terjalin erat dengan denyut nadi kehidupan masyarakatnya.
-          Prinsip-prinsip geometri, rasio, dan bahkan bilangan terapan ini
-          menyatu secara tak terpisahkan dengan fungsi praktis sebagai hunian
-          yang adaptif, filosofi yang mencerminkan pandangan hidup sebagai
-          masyarakat bahari, serta struktur sosial yang mengatur tatanan
-          komunal. Dengan demikian, Boyang adalah bukti hidup bahwa matematika
-          bukanlah konsep abstrak yang jauh, melainkan pengetahuan yang berakar
-          kuat dalam budaya dan kehidupan sehari-hari.
-        </p>
-        <figure>
-          <img
-            src="images/main_img.jpg"
-            alt="Ilustrasi tampak depan Rumah Adat Boyang Mandar"
-          />
-          <figcaption>
-            Visualisasi tampak depan Rumah Boyang yang menonjolkan atap
-            berbentuk prisma segitiga (Tumbaq Layar).
-          </figcaption>
-        </figure>
 
-        <h2>Aspek Geometri dalam Desain Boyang</h2>
-
-        <h3>1. Atap (Tumbaq Layar)</h3>
+      <article class="content">
+        <section id="pendahuluan">
+          <h2>1. Pendahuluan</h2>
+          <h3>1.a. Latar Belakang</h3>
+          <p>
+            Rumah Adat "Boyang" Suku Mandar bukanlah sekadar struktur kayu yang
+            berdiri megah, melainkan sebuah manifestasi nyata dari
+            etnomatematika sebuah jembatan di mana kearifan budaya dan
+            kecerdasan matematis menyatu secara harmonis. Di balik wujudnya yang
+            tampak begitu alami dan menyatu dengan lingkungan pesisir, tersimpan
+            sebuah sistem konstruksi yang terencana dengan presisi luar biasa.
+            Setiap sudut, tiang, dan sambungan pada Boyang bukanlah hasil
+            kebetulan, melainkan buah dari perhitungan cermat yang diwariskan
+            secara turun-temurun. Disinilah letak keistimewaannya unsur-unsur
+            matematika tidak hanya hadir sebagai elemen teknis untuk memastikan
+            kekuatan bangunan, tetapi juga terjalin erat dengan denyut nadi
+            kehidupan masyarakatnya. Prinsip-prinsip geometri, rasio, dan bahkan
+            bilangan terapan ini menyatu secara tak terpisahkan dengan fungsi
+            praktis sebagai hunian yang adaptif, filosofi yang mencerminkan
+            pandangan hidup sebagai masyarakat bahari, serta struktur sosial
+            yang mengatur tatanan komunal. Dengan demikian, Boyang adalah bukti
+            hidup bahwa matematika bukanlah konsep abstrak yang jauh, melainkan
+            pengetahuan yang berakar kuat dalam budaya dan kehidupan
+            sehari-hari.
+          </p>
+          <figure>
+            <img
+              src="assets/images/main_img.jpg"
+              alt="Tampak depan Rumah Adat Boyang Mandar"
+            />
+            <figcaption>
+              Visualisasi tampak depan Rumah Adat Mandar (Boyang). Struktur
+              bangunan ini secara jelas menerapkan berbagai konsep dan prinsip
+              matematika, mulai dari atap berbentuk prisma segitiga (Tumbaq
+              Layar), penggunaan bilangan ganjil pada susunan atap, hingga
+              prinsip simetri pada keseluruhan desain fasad.
+            </figcaption>
+          </figure>
+        </section>
+        <h3>1.b. Rumusan Masalah</h3>
         <p>
-          Atap pada Rumah Boyang, "Tumbaq Layar", secara fundamental membentuk
-          bangun ruang <strong>prisma segitiga</strong>. Jumlah susunannya yang
-          selalu ganjil (3, 5, atau 7) menandakan status sosial pemiliknya,
-          dimana tiga susun untuk rakyat biasa, lima susun untuk bangsawan, dan
-          tujuh susun khusus untuk raja (mara'dia).
+          Berdasarkan analisis aspek matematika dalam arsitektur Rumah Adat
+          Mandar (Boyang), maka dapat dirumuskan permasalahan sebagai berikut:
         </p>
-
-        <h3>Contoh Penghitungan Volume Atap (Prisma Segitiga)</h3>
-        <p>
-          Untuk menghitung volume ruang di bawah atap, kita menggunakan rumus
-          volume prisma:
-        </p>
-        <pre><code>V = Luas Alas * tinggi prisma</code></pre>
-        <p>Dimana:</p>
-        <ul>
-          <li><strong>V</strong> = Volume atap</li>
+        <ol>
           <li>
-            <strong>Luas Alas</strong> = Luas bidang segitiga di depan (1/2 * a
-            * t)
-          </li>
-          <li><strong>tinggi prisma</strong> = Panjang rumah</li>
-        </ul>
-        <p>
-          Misalnya, jika alas segitiga atap (a) 8 meter dan tinggi alas (t alas)
-          5 meter. Panjang rumah (tinggi prisma) adalah 12 meter.
-        </p>
-        <p>Langkah-langkah perhitungan:</p>
-        <pre><code>   Langkah 1: Hitung Luas Alas Segitiga
-    Luas Alas = 1/2 * a * t
-    Luas Alas = 0.5 * 8 m * 5 m = 20 m²
-
-    Langkah 2: Hitung Volume Prisma
-    V = Luas Alas * tinggi prisma
-    V = 20 m² * 12 m = 240 m³</code></pre>
-        <p>Dengan demikian, volume atap adalah 240 meter kubik.</p>
-        <p>Rumus-rumus yang relevan untuk alas atap (Segitiga 2D):</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Jenis Rumus</th>
-              <th>Rumus Matematis</th>
-              <th>Keterangan</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Keliling</strong></td>
-              <td class="rumus-matematis">K = a + b + c</td>
-              <td>Jumlah ketiga sisi</td>
-            </tr>
-            <tr>
-              <td><strong>Luas (alas & tinggi)</strong></td>
-              <td class="rumus-matematis">L = ½ × a × t</td>
-              <td>Dasar utama perhitungan luas</td>
-            </tr>
-            <tr>
-              <td><strong>Luas (dua sisi & sudut)</strong></td>
-              <td class="rumus-matematis">L = ½ × b × c × sinA</td>
-              <td>Jika tinggi tidak diketahui</td>
-            </tr>
-            <tr>
-              <td><strong>Tinggi segitiga</strong></td>
-              <td class="rumus-matematis">t = 2L / a</td>
-              <td>Dari rumus luas</td>
-            </tr>
-            <tr>
-              <td><strong>Hukum Sinus</strong></td>
-              <td class="rumus-matematis">a/sin A = b/sin B = c/sin C</td>
-              <td>Hubungan sisi dan sudut</td>
-            </tr>
-            <tr>
-              <td><strong>Hukum Cosinus</strong></td>
-              <td class="rumus-matematis">a² = b² + c² - 2b cos A</td>
-              <td>Untuk mencari sisi/sudut</td>
-            </tr>
-            <tr>
-              <td><strong>Teorema Pythagoras</strong></td>
-              <td class="rumus-matematis">a² = b² + c²</td>
-              <td>Hanya untuk segitiga siku-siku</td>
-            </tr>
-            <tr>
-              <td><strong>Jumlah sudut</strong></td>
-              <td class="rumus-matematis">A + B + C = 180°</td>
-              <td>Berlaku untuk semua segitiga</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p>Rumus-rumus untuk bangun ruang atap (Prisma Segitiga 3D):</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Jenis Rumus (Prisma Segitiga 3D)</th>
-              <th>Rumus Matematis</th>
-              <th>Keterangan</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Volume Prisma</strong></td>
-              <td class="rumus-matematis">V = Luas Alas × tinggi prisma</td>
-              <td>(Luas Alas = Luas Segitiga)</td>
-            </tr>
-            <tr>
-              <td><strong>Luas Permukaan Prisma</strong></td>
-              <td class="rumus-matematis">
-                Lp = (2 × Luas Alas) + (Keliling Alas × tinggi prisma)
-              </td>
-              <td>Jumlah luas semua sisi</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>2. Tangga (Era): Gradien dan Bilangan ganjil</h3>
-        <p>
-          Tangga, atau Era, tidak hanya berfungsi sebagai akses fisik, tetapi
-          juga sebagai elemen transisi simbolis yang menghubungkan dunia luar
-          dengan ruang domestik di dalam rumah. Konstruksinya adalah penerapan
-          langsung dari konsep matematis
-          <strong>gradien atau kemiringan</strong>. Konsep ini melibatkan
-          perhitungan perbandingan yang cermat antara ketinggian vertikal (rise)
-          dan jarak horizontal (run) dari setiap anak tangga untuk memastikan
-          keamanan dan kenyamanan bagi yang melintasinya. Di luar aspek teknis
-          tersebut, terdapat sebuah aturan numerik yang unik dan konsisten
-          diterapkan, yaitu
-          <strong>jumlah anak tangga harus selalu ganjil</strong>. Aturan ini
-          adalah manifestasi dari "matematika budaya" yang terikat erat pada
-          sistem kepercayaan lokal. Angka ganjil dipercaya oleh masyarakat
-          Mandar membawa keberuntungan dan menolak bala.
-        </p>
-
-        <h3>Contoh Penghitungan Gradien dan Jumlah Anak Tangga</h3>
-        <p>
-          Misalnya, lantai rumah berada 3 meter (300 cm) di atas tanah. Jarak
-          horizontal (run) yang diinginkan untuk tangga adalah 4 meter (400 cm).
-          Tinggi ideal satu anak tangga (rise) adalah 20 cm.
-        </p>
-        <p>Perhitungan:</p>
-        <pre><code>
-    1. Gradien (Kemiringan)
-    m = rise / run
-    m = 300 cm / 400 cm = 0.75
-
-    2. Jumlah Anak Tangga
-    Jumlah = Total Tinggi / Tinggi per anak tangga
-    Jumlah = 300 cm / 20 cm = 15</code></pre>
-        <p>
-          Jumlah anak tangga adalah 15 (Bilangan ganjil), yang sesuai dengan
-          aturan budaya Mandar.
-        </p>
-        <h3>3. Tiang Penyangga (A'ri)</h3>
-        <p>
-          Fondasi Rumah Boyang bertumpu pada puluhan tiang penyangga (A'ri)
-          berbentuk <strong>balok</strong>. Penempatannya mengikuti sistem grid
-          yang presisi untuk memastikan distribusi berat bangunan yang seimbang,
-          membuat struktur menjadi leboh stabil dan tahan dari guncangan. secara
-          filosofis, tiang-tiang ini adalah simbol pilar kekuatan dan martabat
-          keluarga.
-        </p>
-
-        <h3>Contoh Penghitungan Volume Tiang (Balok)</h3>
-        <p>
-          Kita dapat menghitung kebutuhan kayu untuk satu tiang (A'ri)
-          menggunakan rumus volume balok:
-        </p>
-        <pre><code>V = p * l * t</code></pre>
-        <p>Dimana:</p>
-        <ul>
-          <li><strong>V</strong> = Volume kayu</li>
-          <li>
-            <strong>p</strong> = panjang penampang (misal: 20 cm atau 0.2 m)
+            Bagaimana konsep-konsep geometri (bangun datar dan bangun ruang)
+            diterapkan secara nyata pada elemen-elemen arsitektur Rumah Adat
+            Boyang, seperti pada bentuk atap (Tumbaq Layar), tiang penyangga
+            (A'ri), tangga (Era), lantai, dan pintu?
           </li>
           <li>
-            <strong>l</strong> = lebar penampang (misal: 20 cm atau 0.2 m)
+            Bagaimana prinsip-prinsip matematika lainnya, seperti penggunaan
+            bilangan ganjil, gradien (kemiringan), dan barisan aritmetika,
+            terintegrasi dalam desain fungsional dan konstruksi rumah adat
+            tersebut?
           </li>
-          <li><strong>t</strong> = tinggi tiang (misal: 3 m)</li>
-        </ul>
-        <p>Perhitungan:</p>
-        <pre><code>V = p * l * t
-V = 0.2 m * 0.2 m * 3 m = 0.12 m³</code></pre>
-        <p>
-          Dengan demikian, volume kayu yang dibutuhkan untuk satu tiang adalah
-          0.12 meter kubik.
-        </p>
-        <table>
-          <thead>
-            <tr>
-              <th>Nama rumus</th>
-              <th>Rumus matematais</th>
-              <th>keterangan</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Luas Permukaan Balok</strong></td>
-              <td class="rumus-matematis">L = 2(p×l + p×t + l×t)</td>
-              <td>Luas seluruh bidang sisi balok</td>
-            </tr>
-            <tr>
-              <td><strong>Volume Balok</strong></td>
-              <td class="rumus-matematis">V = p × l × t</td>
-              <td>Volume ruang dalam balok</td>
-            </tr>
-            <tr>
-              <td><strong>Keliling Alas Balok</strong></td>
-              <td class="rumus-matematis">K = 2(p + l)</td>
-              <td>Keliling alas berbentuk persegi Panjang</td>
-            </tr>
-            <tr>
-              <td><strong>Luas Alas</strong></td>
-              <td class="rumus-matematis">La = p × l</td>
-              <td>Luas bagian alas balok</td>
-            </tr>
-            <tr>
-              <td><strong>Luas Sisi Tegak (depan/belakang)</strong></td>
-              <td class="rumus-matematis">Ls = p × t</td>
-              <td>Luas sisi panjang balok</td>
-            </tr>
-            <tr>
-              <td><strong>Luas Sisi Tegak (kanan/kiri)</strong></td>
-              <td class="rumus-matematis">Ls = l × t</td>
-              <td>Luas sisi lebar balok</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>4. Lantai</h3>
-        <p>
-          Susunan papan pada lantai menciptakan pola
-          <strong>garis sejajar</strong> dan <strong>pola berulang</strong> yang
-          teratur. Desain ini juga berfungsi untuk memaksimalkan sirkulasi udara
-          (ventilasi) dari kolong rumah, yang mendinginkan suhu di iklim tropis.
-          Pola yang teratur ini mencerminkan nilai-nilai keteraturan dan harmoni
-          dalam kehidupan.
-        </p>
-
-        <h3>Contoh Penghitungan Pola Lantai (Barisan Aritmetika)</h3>
-        <p>
-          Misalnya, lantai renggang terdiri dari bilah papan selebar 10 cm,
-          diikuti celah 2 cm. Pola ini berulang setiap 12 cm. Kita bisa mencari
-          posisi awal bilah papan ke-n menggunakan rumus barisan aritmetika:
-        </p>
-        <pre><code>Un = a + (n - 1)d</code></pre>
-        <p>Dimana:</p>
-        <ul>
-          <li><strong>Un</strong> = Posisi awal bilah papan ke-n</li>
-          <li><strong>a</strong> = Posisi awal bilah pertama (misal: 0 cm)</li>
-          <li><strong>n</strong> = Urutan bilah papan</li>
           <li>
-            <strong>d</strong> = Beda/jarak antar pola (10 cm + 2 cm = 12 cm)
+            Apa makna filosofis dan budaya yang terkandung di balik penerapan
+            setiap konsep matematika dalam arsitektur Rumah Adat Boyang, dan
+            bagaimana hal tersebut mencerminkan sistem pengetahuan serta
+            nilai-nilai masyarakat Suku Mandar?
           </li>
-        </ul>
-        <p>Mencari posisi awal bilah papan ke-5 (n=5):</p>
-        <pre><code>Un = a + (n - 1)d
- U5 = 0 + (5 - 1) * 12 cm
- U5 = 4 * 12 cm = 48 cm</code></pre>
-        <p>
-          Dengan demikian, bilah papan kelima dimulai pada jarak 48 cm dari
-          titik awal.
-        </p>
-        <table>
-          <thead>
-            <tr>
-              <th>Konsep</th>
-              <th>Rumus</th>
-              <th>Keterangan</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Gradien (kemiringan garis)</strong></td>
-              <td class="rumus-matematis">m = (y2 - y1) / (x2 - x1)</td>
-              <td>Menunjukkan kemiringan garis terhadap sumbu X</td>
-            </tr>
-            <tr>
-              <td><strong>Syarat dua garis sejajar</strong></td>
-              <td class="rumus-matematis">m1 = m2</td>
-              <td>Dua garis sejajar memiliki gradien yang sama</td>
-            </tr>
-            <tr>
-              <td><strong>Persamaan garis lurus</strong></td>
-              <td class="rumus-matematis">y = mx + c</td>
-              <td>(m): gradien, (c): titik potong pada sumbu Y</td>
-            </tr>
-            <tr>
-              <td><strong>Barisan aritmetika</strong></td>
-              <td class="rumus-matematis">Un = a + (n - 1)d</td>
-              <td>(a): suku pertama, (d): beda antar suku</td>
-            </tr>
-            <tr>
-              <td><strong>Jumlah n suku pertama (aritmetika)</strong></td>
-              <td class="rumus-matematis">Sn = n/2 (2a + (n - 1)d)</td>
-              <td>Menjumlahkan semua pola berulang sampai ke-n</td>
-            </tr>
-            <tr>
-              <td><strong>Barisan geometri</strong></td>
-              <td class="rumus-matematis">Un = a × r<sup>n-1</sup></td>
-              <td>(r): rasio antar suku</td>
-            </tr>
-            <tr>
-              <td><strong>Jumlah n suku pertama (geometri)</strong></td>
-              <td class="rumus-matematis">
-                Sn = a × (r<sup>n</sup> - 1) / (r - 1)
-              </td>
-              <td>Digunakan jika pola berulang berbentuk perbandingan tetap</td>
-            </tr>
-          </tbody>
-        </table>
+        </ol>
+        <section id="analisis-geometri">
+          <h2>
+            2. Analisis Geometri Arsitektur dalam Desain Boyang atau Rumah Adat
+            Mandar
+          </h2>
 
-        <h3>5. Pintu dan Lengkungan</h3>
-        <p>
-          Pintu utama merupakan gabungan dari
-          <strong>persegi panjang (balok)</strong> dan lengkungan di atasnya
-          yang dapat dianalisis sebagai <strong>setengah tabung</strong>.
-          Bentuknya yang simetris melambangkan keseimbangan dan harmoni,
-          sekaligus keterbukaan dan keramahtamahan masyarakat Mandar.
-        </p>
+          <h3>2.a. Atap (Tumbaq Layar)</h3>
+          <p>
+            Atap pada Rumah Boyang, "Tumbaq Layar", secara fundamental membentuk
+            bangun ruang <strong>prisma segitiga</strong>. Jumlah susunannya
+            yang selalu ganjil (3, 5, atau 7) menandakan status sosial
+            pemiliknya, dimana tiga susun untuk rakyat biasa, lima susun unuk
+            bangswan dan tujuh susun dibuat khusus untuk raja (mara'dia).
+          </p>
 
-        <h3>Contoh Penghitungan Luas Permukaan Pintu</h3>
-        <p>
-          Misalnya, kita ingin menghitung luas permukaan depan pintu untuk
-          dicat. Pintu terdiri dari 2 bagian: persegi panjang (badan) dan
-          setengah lingkaran (lengkungan).
-        </p>
-        <ul>
-          <li>Lebar Pintu (diameter) = 1.2 m (maka jari-jari (r) = 0.6 m)</li>
-          <li>Tinggi badan pintu (tbadan) = 2 m</li>
-        </ul>
-        <p>Langkah-langkah perhitungan:</p>
-        <pre><code>1. Luas Badan (Persegi Panjang)
-Lbadan = p * l
-Lbadan = 1.2 m * 2 m = 2.4 m²
+          <h4>Contoh Perhitungan Volume Atap</h4>
+          <div class="math-formula">
+            <p>Rumus volume prisma:</p>
+            <p>$$V = L_{\text{alas}} \times t_{\text{prisma}}$$</p>
+            <p>
+              Dengan alas segitiga ($a$) = 8 m, tinggi alas ($t$) = 5 m, dan
+              panjang rumah = 12 m:
+            </p>
+            <p>
+              $$ L_{\text{alas}} = \frac{1}{2} \times 8 \, \text{m} \times 5 \,
+              \text{m} = 20 \, \text{m}^2 $$
+            </p>
+            <p>
+              $$ V = 20 \, \text{m}^2 \times 12 \, \text{m} = 240 \, \text{m}^3
+              $$
+            </p>
+          </div>
 
-2. Luas Lengkungan (Setengah Lingkaran)
-Llengkung = 1/2 * pi * r²
-Llengkung = 0.5 * 3.14 * (0.6 m)²
-Llengkung = 0.5 * 3.14 * 0.36 m² = 0.5652 m² (dibulatkan 0.57 m²)
+          <p>Rumus-rumus yang relevan untuk alas atap (Segitiga 2D):</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Jenis Rumus</th>
+                <th>Rumus Matematis</th>
+                <th>Keterangan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Keliling</strong></td>
+                <td class="rumus-matematis">$ K = a + b + c $</td>
+                <td>Jumlah ketiga sisi</td>
+              </tr>
+              <tr>
+                <td><strong>Luas (alas & tinggi)</strong></td>
+                <td class="rumus-matematis">$ L = \frac{1}{2} a t $</td>
+                <td>Dasar perhitungan luas</td>
+              </tr>
+              <tr>
+                <td><strong>Luas (dua sisi & sudut)</strong></td>
+                <td class="rumus-matematis">$ L = \frac{1}{2} bc \sin(A) $</td>
+                <td>Jika tinggi tidak diketahui</td>
+              </tr>
+              <tr>
+                <td><strong>Hukum Sinus</strong></td>
+                <td class="rumus-matematis">
+                  $ \frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} $
+                </td>
+                <td>Hubungan sisi dan sudut</td>
+              </tr>
+              <tr>
+                <td><strong>Hukum Cosinus</strong></td>
+                <td class="rumus-matematis">
+                  $ a^2 = b^2 + c^2 - 2bc \cos(A) $
+                </td>
+                <td>Untuk mencari sisi atau sudut</td>
+              </tr>
+            </tbody>
+          </table>
 
-3. Total Luas
-Ltotal = Lbadan + Llengkung
-Ltotal = 2.4 m² + 0.57 m² = 2.97 m²</code></pre>
-        <p>
-          Dengan demikian, total luas permukaan depan pintu adalah 2.97 meter
-          persegi.
-        </p>
-        <table>
-          <thead>
-            <tr>
-              <th>Bangun Ruang</th>
-              <th>Bagian yang Dihitung</th>
-              <th>Rumus</th>
-              <th>Keterangan</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td rowspan="3">
-                <strong>Setengah Tabung (Setengah Silinder)</strong>
-              </td>
-              <td>Volume</td>
-              <td class="rumus-matematis">V = ½ πr² t</td>
-              <td>Setengah dari volume silinder penuh</td>
-            </tr>
-            <tr>
-              <td>Luas Permukaan</td>
-              <td class="rumus-matematis">Lp = (πrt) + (πr²) + (2rt)</td>
-              <td>L.lengkung + L.dua ujung + L.alas</td>
-            </tr>
-            <tr>
-              <td>Keliling Alas (Busur)</td>
-              <td class="rumus-matematis">K = πr + 2r</td>
-              <td>Panjang busur setengah lingkaran + diameter</td>
-            </tr>
-            <tr>
-              <td rowspan="3"><strong>Balok (Persegi Panjang 3D)</strong></td>
-              <td>Volume</td>
-              <td class="rumus-matematis">V = p × l × t</td>
-              <td>Hasil kali panjang, lebar, dan tinggi</td>
-            </tr>
-            <tr>
-              <td><strong>Luas Permukaan</strong></td>
-              <td class="rumus-matematis">L = 2(pl + pt + lt)</td>
-              <td>Jumlah luas keenam sisi balok</td>
-            </tr>
-            <tr>
-              <td><strong>Diagonal Ruang</strong></td>
-              <td class="rumus-matematis">d = √(p² + l² + t²)</td>
-              <td>Garis diagonal dari satu sudut ke sudut seberangnya</td>
-            </tr>
-          </tbody>
-        </table>
+          <p>Rumus-rumus untuk bangun ruang atap (Prisma Segitiga 3D):</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Jenis Rumus (Prisma Segitiga 3D)</th>
+                <th>Rumus Matematis</th>
+                <th>Keterangan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Volume Prisma</strong></td>
+                <td class="rumus-matematis">
+                  $V = L_{\text{alas}} \times t_{\text{prisma}}$
+                </td>
+                <td>(Luas Alas = Luas Segitiga)</td>
+              </tr>
+              <tr>
+                <td><strong>Luas Permukaan Prisma</strong></td>
+                <td class="rumus-matematis">
+                  $L_p = (2 \times L_{\text{alas}}) + (K_{\text{alas}} \times
+                  t_{\text{prisma}})$
+                </td>
+                <td>Jumlah luas semua sisi</td>
+              </tr>
+            </tbody>
+          </table>
 
-        <h3>Contoh Panorama 360° (Interior)</h3>
-        <p>
-          Putar panorama berikut untuk memvisualisasikan bagaimana ruang di
-          dalam Rumah Boyang terasa. Gunakan pointer atau sentuhan untuk
-          menelusuri seluruh ruangan.
-        </p>
-        <div class="mini-panorama">
-          <div id="mini-panorama"></div>
-        </div>
+          <h3>2.b. Tangga (Era)</h3>
+          <p>
+            Tangga, atau Era, tidak hanya berfungsi sebagai akses fisik, tetapi
+            juga sebagai elemen transisi simbolis yang menghubungkan dunia luar
+            dengan ruang domestik di dalam rumah. Konstruksinya adalah penerapan
+            langsung dari konsep matematis
+            <strong>gradien atau kemiringan</strong>. Konsep ini melibatkan
+            perhitungan perbandingan yang cermat antara ketinggian vertikal
+            (rise) dan jarak horizontal (run) dari setiap anak tangga untuk
+            memastikan keamanan dan kenyamanan bagi yang melintasinya. Di luar
+            aspek teknis tersebut, terdapat sebuah aturan numerik yang unik dan
+            konsisten diterapkan, yaitu
+            <strong>jumlah anak tangga harus selalu ganjil</strong>. Aturan ini
+            adalah manifestasi dari "matematika budaya" yang terikat erat pada
+            sistem kepercayaan lokal. Angka ganjil dipercaya oleh masyarakat
+            Mandar membawa keberuntungan dan menolak bala.
+          </p>
 
-        <h3>Contoh Panorama 360° (Eksterior)</h3>
-        <p>
-          Visualisasi panorama 360° dari sudut yang berbeda (misalnya bagian
-          luar atau kolong rumah).
-        </p>
-        <div class="mini-panorama">
-          <div id="mini-panorama-2"></div>
-        </div>
-        <h2>Kesimpulan</h2>
-        <p>
-          Berdasarkan analisis yang telah dilakukan, dapat disimpulkan bahwa
-          arsitektur Rumah Boyang Suku Mandar merupakan manifestasi nyata dari
-          penerapan etnomatematika. Konsep-konsep geometri seperti prisma
-          segitiga, balok, gradien, dan pola berulang tidak hanya hadir sebagai
-          elemen teknis, tetapi juga menyatu dengan fungsi, filosofi, dan
-          struktur sosial masyarakatnya. Setiap pilihan arsitektural, mulai dari
-          jumlah susunan atap yang menandakan status sosial hingga jumlah anak
-          tangga yang ganjil, adalah bukti bahwa matematika merupakan
-          pengetahuan hidup yang diwariskan secara turun-temurun. Studi ini
-          menegaskan bahwa artefak budaya seperti rumah adat adalah sumber
-          belajar yang kaya untuk memahami bagaimana matematika terintegrasi
-          secara inheren dalam kehidupan sehari-hari.
-        </p>
-      </div>
-    </div>
+          <h4>Contoh Perhitungan Gradien dan Jumlah Anak Tangga</h4>
+          <div class="math-formula">
+            <p>
+              Dengan ketinggian total 300 cm, jarak horizontal 400 cm, dan
+              tinggi per anak tangga 20 cm:
+            </p>
+            <p>
+              $$ \text{Gradien (m)} = \frac{\text{Total Ketinggian}}{\text{Jarak
+              Horizontal}} = \frac{300}{400} = 0.75 $$
+            </p>
+            <p>
+              $$ \text{Jumlah Anak Tangga} = \frac{\text{Total
+              Ketinggian}}{\text{Tinggi per Anak Tangga}} = \frac{300}{20} = 15
+              $$
+            </p>
+          </div>
+
+          <h3>2.c. Tiang Penyangga (A'ri)</h3>
+          <p>
+            Fondasi Rumah Boyang bertumpu pada puluhan tiang penyangga (A'ri)
+            berbentuk <strong>balok</strong>. Penempatannya mengikuti sistem
+            grid yang presisi untuk memastikan distribusi berat bangunan yang
+            seimbang, membuat struktur menjadi leboh stabil dan tahan dari
+            guncangan. secara filosofis, tiang-tiang ini adalah simbol pilar
+            kekuatan dan martabat keluarga.
+          </p>
+
+          <h4>Contoh Perhitungan Volume Tiang</h4>
+          <div class="math-formula">
+            <p>Rumus volume balok: $$ V = p \times l \times t $$</p>
+            <p>
+              Dengan panjang ($p$) = 0.2 m, lebar ($l$) = 0.2 m, dan tinggi
+              ($t$) = 3 m:
+            </p>
+            <p>$$ V = 0.2 \times 0.2 \times 3 = 0.12 \, \text{m}^3 $$</p>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Nama Rumus (Balok)</th>
+                <th>Rumus Matematis</th>
+                <th>Keterangan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Luas Permukaan</strong></td>
+                <td class="rumus-matematis">$ L = 2(pl + pt + lt) $</td>
+                <td>Luas seluruh sisi balok</td>
+              </tr>
+              <tr>
+                <td><strong>Volume</strong></td>
+                <td class="rumus-matematis">$ V = p \times l \times t $</td>
+                <td>Isi ruang dalam balok</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>2.d. Lantai</h3>
+          <p>
+            Susunan papan pada lantai menciptakan pola
+            <strong>garis sejajar</strong> dan
+            <strong>pola berulang</strong> yang teratur. Desain ini juga
+            berfungsi untuk memaksimalkan sirkulasi udara (ventilasi) dari
+            kolong rumah, yang mendinginkan suhu di iklim tropis. Pola yang
+            teratur ini mencerminkan nilai-nilai keteraturan dan harmoni dalam
+            kehidupan.
+          </p>
+
+          <h4>Contoh Penghitungan Pola Lantai</h4>
+          <div class="math-formula">
+            <p>
+              Pola berulang (bilah 10 cm + celah 2 cm = 12 cm). Posisi bilah
+              ke-n dengan barisan aritmetika:
+            </p>
+            <p>$$ U_n = a + (n - 1)d $$</p>
+            <p>
+              Posisi bilah ke-5 ($n=5$), dengan suku awal $a=0$ dan beda $d=12$:
+            </p>
+            <p>$$ U_5 = 0 + (5 - 1) \times 12 = 48 \, \text{cm} $$</p>
+          </div>
+
+          <h3>2.e. Pintu dan Lengkungan</h3>
+          <p>
+            Pintu utama merupakan gabungan dari
+            <strong>persegi panjang (balok)</strong> dan lengkungan di atasnya
+            yang dapat dianalisis sebagai <strong>setengah tabung</strong>.
+            Bentuknya yang simetris melambangkan keseimbangan dan harmoni,
+            sekaligus keterbukaan dan keramahtamahan masyarakat Mandar.
+          </p>
+
+          <h4>Contoh Penghitungan Luas Permukaan Pintu</h4>
+          <div class="math-formula">
+            <p>Dengan lebar pintu 1.2 m ($r=0.6$ m) dan tinggi badan 2 m:</p>
+            <p>
+              $$ L_{\text{badan}} = 1.2 \, \text{m} \times 2 \, \text{m} = 2.4
+              \, \text{m}^2 $$
+            </p>
+            <p>
+              $$ L_{\text{lengkung}} = \frac{1}{2} \pi r^2 = \frac{1}{2} \times
+              3.14 \times (0.6)^2 \approx 0.57 \, \text{m}^2 $$
+            </p>
+            <p>
+              $$ L_{\text{total}} = L_{\text{badan}} + L_{\text{lengkung}} = 2.4
+              + 0.57 = 2.97 \, \text{m}^2 $$
+            </p>
+          </div>
+        </section>
+
+        <section id="panorama">
+          <h2>Visualisasi Ruang 360°</h2>
+          <p>
+            Gunakan panorama berikut untuk memvisualisasikan ruang di dalam dan
+            di luar Rumah Boyang secara imersif.
+          </p>
+          <div class="mini-panorama">
+            <div id="mini-panorama"></div>
+          </div>
+          <div class="mini-panorama">
+            <div id="mini-panorama-2"></div>
+          </div>
+        </section>
+        <h2>3. Penutup</h2>
+        <section id="kesimpulan">
+          <h3>3.a. Kesimpulan</h3>
+          <p>
+            Berdasarkan analisis yang telah dilakukan, dapat disimpulkan bahwa
+            arsitektur Rumah Boyang Suku Mandar merupakan manifestasi nyata dari
+            penerapan etnomatematika. Konsep-konsep geometri seperti prisma
+            segitiga, balok, gradien, dan pola berulang tidak hanya hadir
+            sebagai elemen teknis, tetapi juga menyatu dengan fungsi, filosofi,
+            dan struktur sosial masyarakatnya. Setiap pilihan arsitektural,
+            mulai dari jumlah susunan atap yang menandakan status sosial hingga
+            jumlah anak tangga yang ganjil, adalah bukti bahwa matematika
+            merupakan pengetahuan hidup yang diwariskan secara turun-temurun.
+            Studi ini menegaskan bahwa artefak budaya seperti rumah adat adalah
+            sumber belajar yang kaya untuk memahami bagaimana matematika
+            terintegrasi secara inheren dalam kehidupan sehari-hari. secara
+            turun-temurun.
+          </p>
+
+          <p></p>
+          <h3>3.b. Saran</h3>
+          <p>
+            Berdasarkan temuan dalam kajian ini, penelitian lebih lanjut dapat
+            dikembangkan untuk mengeksplorasi aspek etnomatematika pada artefak
+            budaya Suku Mandar lainnya, seperti geometri pada perahu Sandeq atau
+            pola fraktal pada motif tenun Lipaq Saqbe. Selain itu, temuan ini
+            sangat relevan untuk diadaptasi menjadi media pembelajaran atau
+            modul ajar yang inovatif, sehingga konsep matematika dapat diajarkan
+            secara lebih kontekstual dan relevan bagi siswa, sekaligus
+            memperkuat pemahaman mereka terhadap warisan budaya lokal.
+          </p>
+          <section>
+            <h2>4. DAFTAR PUSTAKA</h2>
+            <div class="bibliografi">
+              <p>
+                [1] Fauzi, A., & Pujiastuti, H. (2021).
+                <i>Implementasi Etnomatematika dalam Pembelajaran Matematika</i
+                >. Jurnal Pendidikan Matematika (JPM), 7(1), 69-80.
+              </p>
+              <p>
+                [2] Abdullah, M. W. (2012).
+                <i>Arsitektur Tradisional Mandar</i>. Makassar: Alauddin
+                University Press.
+              </p>
+              <p>
+                [1] Pakan, P., Saliya, S. A., & Hartawan, I. N. (2017).
+                <i
+                  >Struktur dan Konstruksi Rumah Adat Boyang Suku Mandar di Desa
+                  Pambusuang</i
+                >. Jurnal Perspektif Arsitektur, 12(1), 1-10.
+              </p>
+              <p>
+                [2] Said, M. (2004).
+                <i>Rumah Adat Mandar: Struktur, Fungsi, dan Makna</i>. Polewali:
+                Dinas Kebudayaan dan Pariwisata Kabupaten Polewali Mandar.
+              </p>
+              <p>
+                [3] Dawson, B., & Gillow, J. (1994).
+                <i>The Traditional Architecture of Indonesia</i>. London: Thames
+                and Hudson.
+              </p>
+            </div>
+          </section>
+        </section>
+      </article>
+    </main>
 
     <footer>
-      © 2025 · Aspek Matematika Rumah Adat Mandar · Etnomatematika Suku Mandar
+      <p>
+        © 2025 · Aspek Matematika Rumah Adat Mandar · Etnomatematika Suku Mandar
+      </p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Panorama 1 (yang sudah ada)
         pannellum.viewer("mini-panorama", {
           type: "equirectangular",
-          panorama: "panos/image2.jpg", // Ini sudah benar
+          panorama: "assets/360_images/image2.jpg",
           autoLoad: true,
           showZoomCtrl: false,
           compass: false,
@@ -553,10 +604,9 @@ Ltotal = 2.4 m² + 0.57 m² = 2.97 m²</code></pre>
           pitch: 0,
           yaw: 120,
         });
-
         pannellum.viewer("mini-panorama-2", {
           type: "equirectangular",
-          panorama: "panos/image0.jpg", // <-- PERBAIKAN DI SINI
+          panorama: "assets/360_images/image0.jpg",
           autoLoad: true,
           showZoomCtrl: false,
           compass: false,
