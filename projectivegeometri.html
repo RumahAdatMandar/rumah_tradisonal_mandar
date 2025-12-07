@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analisis Geometri Rumah Adat Mandar</title>
+    <style>
+      body {
+        background-color: #0d1117;
+        color: #e5e5e5;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Tombol Kembali */
+      .back-button {
+        position: absolute;
+        top: 20px;
+        left: 25px;
+        background-color: #00c8ff;
+        color: #0d1117;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 200, 255, 0.3);
+        z-index: 10;
+      }
+
+      .back-button:hover {
+        background-color: #008cbf;
+        box-shadow: 0 6px 16px rgba(0, 200, 255, 0.45);
+        transform: translateY(-2px);
+      }
+
+      .container {
+        width: 90%;
+        max-width: 900px;
+        margin-top: 80px;
+        margin-bottom: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+        color: #00c8ff;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #00c8ff;
+        padding-bottom: 10px;
+        letter-spacing: 1px;
+        text-align: center;
+      }
+
+      /* Container Gambar */
+      .image-container {
+        background-color: #fff; /* Latar putih agar gambar terlihat jelas sesuai aslinya */
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 30px;
+        width: 100%;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+        text-align: center;
+      }
+
+      .image-container img {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        display: inline-block;
+      }
+
+      /* Kotak Deskripsi */
+      .description-box {
+        background-color: #161b22;
+        border-left: 4px solid #00c8ff;
+        padding: 25px;
+        border-radius: 0 8px 8px 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .description-box h2 {
+        font-size: 1.4rem;
+        color: #fff;
+        margin-top: 0;
+        margin-bottom: 20px;
+      }
+
+      .analysis-item {
+        margin-bottom: 25px;
+        border-bottom: 1px solid #30363d;
+        padding-bottom: 15px;
+      }
+
+      .analysis-item:last-child {
+        border-bottom: none;
+      }
+
+      .analysis-item h3 {
+        color: #00c8ff;
+        margin-bottom: 10px;
+      }
+
+      .analysis-item p {
+        line-height: 1.6;
+        color: #b0b8c4;
+        text-align: justify;
+      }
+
+      footer {
+        font-size: 0.85rem;
+        color: #888;
+        text-align: center;
+        padding: 20px 0;
+        width: 100%;
+        background-color: #0d1117;
+        margin-top: auto;
+      }
+
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 1.5rem;
+        }
+        .container {
+          margin-top: 70px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="back-button">← Kembali</a>
+
+    <div class="container">
+      <h1>Analisis Geometri Rumah Adat Mandar</h1>
+
+      <div class="image-container">
+        <img
+          src="assets/images/projective_geometry_mandar.png"
+          alt="Analisis Geometri Boyang"
+        />
+      </div>
+
+      <div class="description-box">
+        <h2>Dekomposisi Bentuk Geometris</h2>
+        <p>
+          Berdasarkan visualisasi di atas, arsitektur Boyang dapat dianalisis
+          melalui tiga tahapan abstraksi geometri (dari bentuk nyata ke bentuk
+          matematika):
+        </p>
+
+        <div class="analysis-item">
+          <h3>1. Geometri Bidang Datar: Segitiga (Tampak Depan)</h3>
+          <p>
+            Pada baris pertama gambar, tampak depan atap rumah (bagian
+            <em>Tumbaq Layar</em>) diabstraksikan menjadi bangun datar
+            <strong>Segitiga Sama Kaki</strong>. Garis putus-putus vertikal di
+            tengah segitiga menunjukkan <strong>sumbu simetri</strong> atau
+            garis tinggi. Hal ini membuktikan bahwa arsitektur Mandar sangat
+            memperhatikan prinsip keseimbangan (simetri bilateral), di mana
+            beban atap didistribusikan secara merata ke sisi kiri dan kanan.
+          </p>
+        </div>
+
+        <div class="analysis-item">
+          <h3>2. Geometri Ruang: Balok/Prisma (Badan Rumah)</h3>
+          <p>
+            Pada baris kedua, badan utama rumah (area hunian atau
+            <em>Lawayang</em>) diproyeksikan sebagai bangun ruang tiga dimensi,
+            yaitu <strong>Balok</strong> atau Prisma Segi Empat. Garis merah
+            mempertegas volume ruang, sementara garis putus-putus menunjukkan
+            rusuk yang tidak terlihat (hidden lines). Ini menggambarkan konsep
+            ruang fungsional pada rumah panggung yang berbentuk kotak memanjang
+            untuk memaksimalkan sirkulasi udara.
+          </p>
+        </div>
+
+        <div class="analysis-item">
+          <h3>3. Analisis Bidang & Diagonal: Persegi Panjang (Sisi Atap)</h3>
+          <p>
+            Pada baris ketiga, salah satu sisi bidang atap diisolasi menjadi
+            bangun datar <strong>Persegi Panjang</strong>. Dua garis putus-putus
+            yang bersilangan adalah <strong>garis diagonal</strong>. Titik temu
+            kedua diagonal ini seringkali menjadi titik pusat berat bidang
+            tersebut. Dalam konstruksi, pemahaman tentang diagonal ini penting
+            untuk menjaga kekakuan (rigiditas) struktur rangka atap agar tidak
+            mudah miring atau roboh.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer>© 2025 Etnomatematika Rumah Adat Mandar · Tim Pengembang</footer>
+  </body>
+</html>

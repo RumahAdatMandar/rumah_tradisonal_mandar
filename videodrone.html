@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Drone Rumah Adat Mandar</title>
+
+    <style>
+      body {
+        background-color: #0d1117;
+        color: #e5e5e5;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative;
+      }
+
+      /* Tombol Kembali */
+      .back-button {
+        position: absolute;
+        top: 20px;
+        left: 25px;
+        background-color: #00c8ff;
+        color: #0d1117;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 200, 255, 0.3);
+        text-decoration: none; /* Tambahan agar aman jika diganti tag <a> */
+      }
+
+      .back-button:hover {
+        background-color: #008cbf;
+        box-shadow: 0 6px 16px rgba(0, 200, 255, 0.45);
+        transform: translateY(-2px);
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        color: #00c8ff;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #00c8ff;
+        padding-bottom: 8px;
+        letter-spacing: 1px;
+        text-align: center;
+      }
+
+      .description {
+        max-width: 700px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #c9d1d9;
+        margin-bottom: 22px;
+        text-align: justify;
+      }
+
+      .model-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #111827;
+        border-radius: 12px;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        margin-bottom: 25px;
+        width: 90%;
+        max-width: 700px;
+        height: 400px; /* Rasio standar player YouTube */
+      }
+
+      /* Styling untuk Iframe YouTube agar responsif di dalam container */
+      iframe {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        border: none;
+      }
+
+      footer {
+        font-size: 0.85rem;
+        color: #888;
+        text-align: center;
+        position: fixed;
+        bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="back-button" onclick="window.location.href='index.html'">
+      ← Kembali
+    </button>
+
+    <h1>Video Drone Rumah Adat Mandar</h1>
+
+    <p class="description">
+      Video ini menampilkan keindahan arsitektur Rumah Adat dari sudut pandang
+      udara. Melalui tayangan ini, Anda dapat melihat secara utuh bentuk atap
+      "Tumbaq Layar" yang ikonik, susunan massa bangunan yang memanjang, serta
+      bagaimana struktur rumah panggung (Boyang) berdiri kokoh dan selaras
+      dengan lingkungan sekitarnya. Perspektif ini memberikan gambaran skala dan
+      proporsi bangunan yang tidak terlihat dari pandangan mata biasa.
+    </p>
+
+    <div class="model-container">
+      <iframe
+        src="https://www.youtube.com/embed/D_6230TLffA?si=oZ0hSA_ShsoDbUR1"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      >
+      </iframe>
+    </div>
+
+    <footer>© 2025 Etnomatematika Rumah Adat Mandar · Tim Pengembang</footer>
+  </body>
+</html>
