@@ -11,6 +11,7 @@
     ></script>
 
     <style>
+      /* --- GLOBAL STYLES --- */
       body {
         background-color: #0d1117;
         color: #e5e5e5;
@@ -21,11 +22,11 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        min-height: 100vh; /* Menggunakan min-height agar responsif pada layar kecil */
+        min-height: 100vh;
         position: relative;
       }
 
-      /* Tombol di pojok kiri atas */
+      /* --- TOMBOL KEMBALI --- */
       .back-button {
         position: absolute;
         top: 20px;
@@ -37,7 +38,7 @@
         border-radius: 8px;
         font-weight: 600;
         cursor: pointer;
-        text-decoration: none; /* Agar elemen <a> terlihat seperti tombol */
+        text-decoration: none;
         transition: all 0.3s ease;
         box-shadow: 0 4px 10px rgba(0, 200, 255, 0.3);
         z-index: 10;
@@ -45,52 +46,110 @@
 
       .back-button:hover {
         background-color: #008cbf;
-        box-shadow: 0 6px 16px rgba(0, 200, 255, 0.45);
         transform: translateY(-2px);
       }
 
       h1 {
         font-size: 1.8rem;
         color: #00c8ff;
-        margin-top: 60px; /* Jarak tambahan dari atas karena tombol back absolute */
-        margin-bottom: 25px;
+        margin-top: 80px;
+        margin-bottom: 20px;
         border-bottom: 2px solid #00c8ff;
         padding-bottom: 8px;
         letter-spacing: 1px;
         text-align: center;
       }
 
-      .model-container {
+      /* --- CONTAINER MODEL --- */
+      .model-wrapper {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-        background-color: #111827;
+        background-color: #161b22;
         border-radius: 12px;
         box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
         padding: 10px;
         margin-bottom: 25px;
         width: 90%;
         max-width: 700px;
-        height: 400px; /* Tinggi area model */
+        border: 1px solid #30363d;
+      }
+
+      .model-container {
+        width: 100%;
+        height: 400px;
+        position: relative;
       }
 
       model-viewer {
         width: 100%;
         height: 100%;
         border-radius: 10px;
-        background-color: #111827;
-        --poster-color: #111827;
+        background-color: #0d1117;
+        --poster-color: #0d1117;
       }
 
-      /* Styling untuk teks deskripsi */
+      /* --- PANEL KONTROL TOMBOL --- */
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px; /* Jarak antar grup sedikit diperbesar agar rapi */
+        justify-content: center;
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #21262d;
+        border-radius: 8px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .control-group {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+
+      .control-group span {
+        font-size: 0.8rem;
+        color: #8b949e;
+        margin-right: 5px;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .btn-ctrl {
+        background-color: #30363d;
+        border: 1px solid #6e7681;
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+      }
+
+      .btn-ctrl:hover {
+        background-color: #00c8ff;
+        color: #000;
+        border-color: #00c8ff;
+      }
+
+      .btn-ctrl:active {
+        transform: scale(0.95);
+      }
+
+      /* --- TEXT & FOOTER --- */
       .description-text {
         width: 90%;
         max-width: 700px;
         text-align: justify;
         line-height: 1.7;
         color: #cfcfcf;
-        margin-top: 10px;
-        margin-bottom: 50px; /* Memberi ruang agar tidak tertutup footer */
+        margin-bottom: 60px;
       }
 
       footer {
@@ -102,15 +161,14 @@
         background-color: #0d1117;
         position: fixed;
         bottom: 0;
+        z-index: 100;
       }
 
-      /* Agar footer tidak menutupi konten di layar pendek */
       @media (max-height: 700px) {
         footer {
           position: relative;
         }
         body {
-          height: auto;
           padding-bottom: 20px;
         }
       }
@@ -121,28 +179,105 @@
 
     <h1>3D Model Rumah Adat Mandar</h1>
 
-    <div class="model-container">
-      <model-viewer
-        src="assets/model/Rumah_Adat_Mandarfix.glb"
-        alt="Model 3D Rumah Adat Mandar (Boyang)"
-        camera-controls
-        auto-rotate
-        shadow-intensity="1"
-        exposure="1.0"
-        ar
-      >
-      </model-viewer>
+    <div class="model-wrapper">
+      <div class="model-container">
+        <model-viewer
+          id="boyang-viewer"
+          src="assets/model/Rumah_Adat_Mandarfix.glb"
+          alt="Model 3D Rumah Adat Mandar (Boyang)"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1"
+          exposure="1.0"
+          ar
+          interpolation-decay="200"
+          min-camera-orbit="auto auto 5%"
+          max-camera-orbit="auto auto 100%"
+        >
+        </model-viewer>
+      </div>
+
+      <div class="controls">
+        <div class="control-group">
+          <span>Zoom:</span>
+          <button class="btn-ctrl" onclick="ubahZoom(-10)" title="Zoom Out">
+            ➖
+          </button>
+          <button class="btn-ctrl" onclick="ubahZoom(10)" title="Zoom In">
+            ➕
+          </button>
+        </div>
+
+        <div class="control-group">
+          <span>Putar:</span>
+          <button
+            class="btn-ctrl"
+            onclick="putarKamera(-30)"
+            title="Putar Kiri"
+          >
+            ↺
+          </button>
+          <button
+            class="btn-ctrl"
+            onclick="putarKamera(30)"
+            title="Putar Kanan"
+          >
+            ↻
+          </button>
+        </div>
+
+        <div class="control-group">
+          <button
+            class="btn-ctrl"
+            onclick="resetKamera()"
+            title="Reset Posisi"
+            style="background-color: #da3633; border-color: #da3633"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
     </div>
 
     <p class="description-text">
-      Model 3D Rumah Adat Mandar (Boyang) ini menampilkan detail arsitektur
-      rumah panggung khas Sulawesi Barat. Perhatikan bentuk atap "Tumbaq Layar"
-      yang ikonik dengan ornamen segitiganya, serta susunan tiang penyangga yang
-      kokoh. Struktur ini dirancang secara cerdas untuk beradaptasi dengan
-      lingkungan pesisir, melancarkan sirkulasi udara, sekaligus mencerminkan
-      status sosial pemiliknya melalui jumlah susunan atap dan tiang.
+      Model 3D Rumah Adat Mandar (Boyang). Gunakan tombol di atas atau sentuh
+      layar (cubit/geser) untuk berinteraksi langsung dengan model.
     </p>
 
     <footer>© 2025 Etnomatematika Rumah Adat Mandar · Tim Pengembang</footer>
+
+    <script>
+      const modelViewer = document.querySelector("#boyang-viewer");
+
+      // 1. FUNGSI PUTAR (ORBIT)
+      // Mengubah sudut theta (horizontal)
+      function putarKamera(deg) {
+        const orbit = modelViewer.getCameraOrbit(); // Ambil posisi saat ini
+        const theta = orbit.theta + (deg * Math.PI) / 180; // Konversi derajat ke radian
+
+        // Update posisi kamera (pertahankan phi dan radius)
+        modelViewer.cameraOrbit = `${theta}rad ${orbit.phi}rad ${orbit.radius}m`;
+      }
+
+      // 2. FUNGSI ZOOM (FIELD OF VIEW)
+      // Mengubah Field of View (FOV) agar terasa zoom in/out
+      function ubahZoom(step) {
+        const currentFov = modelViewer.getFieldOfView(); // Ambil FOV saat ini
+        let newFov = currentFov - step;
+
+        if (newFov < 10) newFov = 10;
+        if (newFov > 45) newFov = 45;
+
+        modelViewer.fieldOfView = `${newFov}deg`;
+      }
+
+      // 3. FUNGSI RESET
+      // Mengembalikan ke posisi awal (tengah)
+      function resetKamera() {
+        modelViewer.cameraTarget = "auto auto auto";
+        modelViewer.cameraOrbit = "auto auto auto";
+        modelViewer.fieldOfView = "auto";
+      }
+    </script>
   </body>
 </html>

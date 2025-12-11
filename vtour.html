@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pannellum Tour 0–53 (no loops)</title>
+    <title>Pannellum Tour 1–9</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
@@ -17,7 +17,7 @@
   <body>
     <div class="top-bar">
       <a href="index.html" class="go-home">← Kembali ke Beranda</a>
-      <h3 class="page-title">Pannellum Virtual Tour (Scenes 0 → 9)</h3>
+      <h3 class="page-title">Pannellum Virtual Tour (Scenes 1 → 9)</h3>
       <div class="top-bar__actions">
         <button class="minimap-btn" onclick="showMinimap()">
           Tampilkan Minimap
@@ -26,7 +26,6 @@
       </div>
     </div>
 
-    <!-- Modal Minimap -->
     <div id="minimapModal" class="minimap-modal" onclick="hideMinimap()">
       <img
         src="assets/images/minimap.jpg"
@@ -37,8 +36,6 @@
 
     <div id="panorama"></div>
     <div class="scenes">
-      <!-- Static scene buttons without any loop -->
-      <button onclick="viewer.loadScene('s0')">0</button>
       <button onclick="viewer.loadScene('s1')">1</button>
       <button onclick="viewer.loadScene('s2')">2</button>
       <button onclick="viewer.loadScene('s3')">3</button>
@@ -51,97 +48,15 @@
     </div>
 
     <script>
-      // function renderAlertHotspot(hotSpotDiv, args) {
-      //   hotSpotDiv.classList.add('custom-hotspot');
-
-      //   if (args) {
-      //     const tooltip = document.createElement('span');
-      //     tooltip.textContent = args;
-      //     hotSpotDiv.appendChild(tooltip);
-      //   }
-      // }
-
-      /*
-        // === Generator otomatis hotspot ===
-        // const LAST_SCENE_INDEX = 53;
-        // const scenes = {};
-        // for (let i = 0; i <= LAST_SCENE_INDEX; i += 1) {
-        //   const sceneId = `s${i}`;
-        //   const entry = {
-        //     title: `Spot ${i}`,
-        //     type: "equirectangular",
-        //     panorama: `panos/image${i}.jpg`
-        //   };
-        //   if (i < LAST_SCENE_INDEX) {
-        //     entry.hotSpots = [{
-        //       pitch: 0,
-        //       yaw: 0,
-        //       type: "scene",
-        //       sceneId: `s${i + 1}`,
-        //       text: `Ke Spot ${i + 1}`
-        //     }];
-        //   }
-        //   scenes[sceneId] = entry;
-        // }
-        // var viewer = pannellum.viewer('panorama', {
-        //   "default": {
-        //     "firstScene": "s0",
-        //     "autoLoad": true,
-        //     "showControls": true
-        //   },
-        //   "scenes": scenes
-        // });
-      */
-
-      // === Konfigurasi manual dengan hotspot eksplisit ===
       var viewer = pannellum.viewer("panorama", {
         default: {
-          firstScene: "s0",
+          firstScene: "s1", // UBAH: Mulai dari s1
           autoLoad: true,
           showControls: true,
         },
         scenes: {
-          s0: {
-            title: "Spot 0",
-            type: "equirectangular",
-            pitch: 13.53,
-            yaw: -173.1,
-            panorama: "assets/360_images/image0.jpg",
-            hotSpots: [
-              {
-                pitch: 1,
-                yaw: -147.39,
-                type: "scene",
-                sceneId: "s1",
-                text: "Ke Tangga",
-              },
-              {
-                pitch: 36,
-                yaw: 177,
-                type: "info",
-              },
-              {
-                pitch: -7.93,
-                yaw: 170,
-                type: "info",
-                text: "Bunga",
-              },
-              {
-                pitch: -14.16,
-                yaw: -76.75,
-                type: "info",
-                text: "Motor",
-              },
-              {
-                pitch: -4.23,
-                yaw: 27,
-                type: "info",
-                text: "Papan Nama Rumah Adat",
-              },
-            ],
-          },
           s1: {
-            title: "Tangga",
+            title: "Depan Pintu",
             type: "equirectangular",
             panorama: "assets/360_images/image1.jpg",
             hotSpots: [
@@ -150,12 +65,11 @@
                 yaw: 0,
                 type: "scene",
                 sceneId: "s2",
-                text: "Naik Tangga",
               },
             ],
           },
           s2: {
-            title: "Ruang utama 1",
+            title: "Spot 2",
             type: "equirectangular",
             pitch: -1.81,
             yaw: 88.31,
@@ -273,8 +187,8 @@
                 pitch: 0,
                 yaw: -59.7,
                 type: "scene",
-                sceneId: "s0",
-                text: "Ke Spot 0",
+                sceneId: "s1", // UBAH: Kembali ke s1 (bukan s0)
+                text: "Ke Spot 1",
               },
             ],
           },
@@ -399,7 +313,6 @@
         }
       };
 
-      // Set cursor awal dan pesan bawaan
       enableDrag();
 
       document.addEventListener("click", () => {

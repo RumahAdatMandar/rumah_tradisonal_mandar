@@ -6,6 +6,7 @@
     <title>Video Drone Rumah Adat Mandar</title>
 
     <style>
+      /* --- RESET & BASIC STYLE --- */
       body {
         background-color: #0d1117;
         color: #e5e5e5;
@@ -16,41 +17,39 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh;
         position: relative;
       }
 
-      /* Tombol Kembali */
+      /* --- TOMBOL KEMBALI --- */
       .back-button {
         position: absolute;
         top: 20px;
         left: 25px;
-        background-color: #00c8ff;
-        color: #0d1117;
-        border: none;
-        padding: 10px 18px;
+        background-color: transparent;
+        color: #00c8ff;
+        border: 2px solid #00c8ff;
+        padding: 8px 16px;
         border-radius: 8px;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 10px rgba(0, 200, 255, 0.3);
-        text-decoration: none; /* Tambahan agar aman jika diganti tag <a> */
+        text-decoration: none;
       }
 
       .back-button:hover {
-        background-color: #008cbf;
-        box-shadow: 0 6px 16px rgba(0, 200, 255, 0.45);
-        transform: translateY(-2px);
+        background-color: #00c8ff;
+        color: #0d1117;
       }
 
+      /* --- JUDUL & DESKRIPSI --- */
       h1 {
         font-size: 1.8rem;
         color: #00c8ff;
         margin-bottom: 10px;
-        border-bottom: 2px solid #00c8ff;
-        padding-bottom: 8px;
-        letter-spacing: 1px;
+        margin-top: 60px; /* Jarak agar tidak menabrak tombol back di HP */
         text-align: center;
+        letter-spacing: 1px;
       }
 
       .description {
@@ -58,38 +57,75 @@
         font-size: 0.95rem;
         line-height: 1.6;
         color: #c9d1d9;
-        margin-bottom: 22px;
-        text-align: justify;
+        margin-bottom: 25px;
+        text-align: center;
+        padding: 0 20px;
       }
 
+      /* --- KONTAINER TOMBOL GANTI VIDEO --- */
+      .button-container {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+        background-color: #161b22;
+        padding: 5px;
+        border-radius: 10px;
+        border: 1px solid #30363d;
+      }
+
+      .video-btn {
+        padding: 10px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        background-color: transparent;
+        color: #8b949e;
+      }
+
+      .video-btn:hover {
+        color: #e5e5e5;
+      }
+
+      /* Style untuk tombol yang sedang Aktif */
+      .video-btn.active {
+        background-color: #00c8ff;
+        color: #0d1117;
+        box-shadow: 0 4px 12px rgba(0, 200, 255, 0.4);
+      }
+
+      /* --- KONTAINER VIDEO --- */
       .model-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #111827;
+        background-color: #161b22;
+        border: 1px solid #30363d;
         border-radius: 12px;
-        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         padding: 10px;
-        margin-bottom: 25px;
+        margin-bottom: 40px;
         width: 90%;
         max-width: 700px;
-        height: 400px; /* Rasio standar player YouTube */
+        height: auto;
+        aspect-ratio: 16/9; /* Menjaga rasio video tetap proporsional */
       }
 
-      /* Styling untuk Iframe YouTube agar responsif di dalam container */
-      iframe {
+      video {
         width: 100%;
         height: 100%;
-        border-radius: 10px;
-        border: none;
+        border-radius: 8px;
+        background-color: #000;
+        outline: none;
       }
 
       footer {
         font-size: 0.85rem;
         color: #888;
         text-align: center;
-        position: fixed;
-        bottom: 15px;
+        padding-bottom: 20px;
       }
     </style>
   </head>
@@ -101,25 +137,57 @@
     <h1>Video Drone Rumah Adat Mandar</h1>
 
     <p class="description">
-      Video ini menampilkan keindahan arsitektur Rumah Adat dari sudut pandang
-      udara. Melalui tayangan ini, Anda dapat melihat secara utuh bentuk atap
-      "Tumbaq Layar" yang ikonik, susunan massa bangunan yang memanjang, serta
-      bagaimana struktur rumah panggung (Boyang) berdiri kokoh dan selaras
-      dengan lingkungan sekitarnya. Perspektif ini memberikan gambaran skala dan
-      proporsi bangunan yang tidak terlihat dari pandangan mata biasa.
+      Saksikan keindahan arsitektur Rumah Adat Mandar dari udara. Silakan pilih
+      durasi video yang ingin Anda tonton di bawah ini.
     </p>
 
-    <div class="model-container">
-      <iframe
-        src="https://www.youtube.com/embed/D_6230TLffA?si=oZ0hSA_ShsoDbUR1"
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
+    <div class="button-container">
+      <button
+        class="video-btn active"
+        id="btn-pendek"
+        onclick="gantiVideo('pendek')"
       >
-      </iframe>
+        🎥 Video Pendek
+      </button>
+      <button class="video-btn" id="btn-full" onclick="gantiVideo('full')">
+        🎬 Video Full
+      </button>
+    </div>
+
+    <div class="model-container">
+      <video id="mainVideo" controls>
+        <source src="assets/drone/Drone Pendek.MP4" type="video/mp4" />
+        Browser Anda tidak mendukung tag video.
+      </video>
     </div>
 
     <footer>© 2025 Etnomatematika Rumah Adat Mandar · Tim Pengembang</footer>
+
+    <script>
+      function gantiVideo(tipe) {
+        // Ambil elemen video dan tombol
+        const videoPlayer = document.getElementById("mainVideo");
+        const btnPendek = document.getElementById("btn-pendek");
+        const btnFull = document.getElementById("btn-full");
+
+        // Logika Ganti Source dan Style Tombol
+        if (tipe === "pendek") {
+          // Ganti sumber video
+          videoPlayer.src = "assets/drone/Drone Pendek.MP4";
+          btnPendek.classList.add("active");
+          btnFull.classList.remove("active");
+        } else {
+          // Ganti sumber video
+          videoPlayer.src = "assets/drone/Drone full.MP4";
+
+          // Ubah tampilan tombol (Full jadi aktif, Pendek jadi mati)
+          btnFull.classList.add("active");
+          btnPendek.classList.remove("active");
+        }
+
+        // Putar video otomatis setelah diganti
+        videoPlayer.play();
+      }
+    </script>
   </body>
 </html>
